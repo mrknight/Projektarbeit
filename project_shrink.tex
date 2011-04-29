@@ -1,0 +1,82 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+%\documentclass{amsart}
+\usepackage[english]{babel} %,ngerman
+\usepackage{amsmath, amstext, amsthm, amssymb}
+\usepackage{fullpage}
+\usepackage{color}
+\usepackage{setspace}
+\usepackage{graphicx}
+\usepackage[font=small,format=hang,labelfont=bf,up,up]{caption}
+\usepackage{natbib}
+\usepackage{tabularx, multirow, slashbox}
+\usepackage[english]{varioref}
+\usepackage{hyperref}
+\usepackage{algorithm, algpseudocode}
+\usepackage{enumerate}
+\renewcommand{\familydefault}{\sfdefault}
+
+\title{Shrinkage concept in microarray study}
+
+\author{Q. Dat Nguyen \\\small{Institut f\"ur Informatik, Martin-Luther-Universit\"at Halle-Wittenberg}\\\small{Supervisor: Prof. Dr. Ivo Grosse}}
+\date{\today}
+
+
+%%%%%%%%%%%%%%%%%%%%% maths definition %%%%%%%%%%%%%%%%%%%%%
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{document}
+	\maketitle
+	\begin{center}
+		\includegraphics[width=0.50\textwidth]{/Users/knight/dev/output/project_shrink/siegel}
+	\end{center}
+	\thispagestyle{empty}
+	\newpage
+	\tableofcontents
+	\newpage
+\section{Introduction}
+	\input{Introduction}
+\section{Background}
+	\input{Background}
+\section{Shrinkage concept}
+	\subsection{James \& Stein shrinkage rule}
+		\input{shrinkage-rule}
+	\subsection{The \emph{shrinkage}-t statistic}
+		\input{shrinkage-t}
+	\subsection{The \emph{shrinkage}-ANOVA}
+		\input{shrinkage-ANOVA}
+\section{Shrinkage-t simulation}
+	\input{Simu-t}
+\section{Shrinkage-ANOVA simulation}
+	\input{Simu-ANOVA}
+\section{Discussion}
+	\input{Discussion}
+\section*{ACKNOWLEDGMENT}
+I would like to give many thanks to Yvonne Poeschl, Markus Boenn for many helpful discussions, to Ioana Lemmian for reading the drafting script. My special thank to Prof. Dr. Ivo Grosse, who supervised this project.
+\newpage
+\appendix
+	\newpage
+	\input{Appendix}	
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Literaturverzeichnis und Abbildungsverzeichnis (erstellt sich automatisch)
+\nocite{*}
+\bibliographystyle{apalike}%apalike, alpha,plain, alpha, abbrv, unsrt, apalike
+\bibliography{Projekt_shrinkage,Projekt_shrinkage_my} %including the bib file w/ extension
+
+%\listoffigures
+%\listoftables
+%\listofalgorithms
+% End: Literaturverzeichnis und Abbildungsverzeichnis (erstellt sich automatisch)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

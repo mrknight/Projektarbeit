@@ -1,0 +1,50 @@
+The simulation setting was set with the number of genes P = 5000 and the number of samples N = 3. All the four considered simulation options in which the third and the fourth simulation option yields for each option another six new options (for each $p = 1, 2, 5, 10, 20, 50\%$), were combined with five cases of choices for the targets, make a total number of $2 + 6 + 6 = 14$ simulations options x 5 choices of targets = 70 combinations. For each combination the two score functions for each gene was calculated according to the methods mentioned above and stored for 5000 genes. The procedure was repeated 500 times and a cumulative histogram of the two score functions for each combination was plotted. Since the (III) and (IV) simulation options are more sophisticated than the (I) and (II), the histograms of those options were shown in \autoref{fig:scoreIIIp01} the comparison for (III) option and in \autoref{fig:scoreIVp01} for (IV) option.\\
+\begin{figure}[h!tp]
+	\centering
+	\includegraphics[width=0.7\textwidth]{/Users/knight/dev/output/project_shrink/score_IIIp01.pdf}
+	\caption[a]{Cumulative histograms of score for the (III) simulation option and outliers number p = 10\% }
+	\label{fig:scoreIIIp01}
+\end{figure}
+\begin{figure}[h!p]
+	\centering
+	\includegraphics[width=0.7\textwidth]{/Users/knight/dev/output/project_shrink/score_IVp01.pdf}
+	\caption[a]{Cumulative histograms of score for the (IV) simulation option and outliers number p = 10\% }
+	\label{fig:scoreIVp01}	
+\end{figure}
+\\Similar for the $\widetilde{score}$ functions which merely reduce the number of outliers to p = 2\%, the histograms of $\widetilde{score}$ functions were shown in \autoref{fig:scoretIIIp002} and \autoref{fig:scoretIVp002}\\
+\begin{figure}[h!t]
+	\centering
+	\includegraphics[width=0.7\textwidth]{/Users/knight/dev/output/project_shrink/scoret_IIIp002.pdf}
+	\caption[a]{Cumulative histograms of $\widetilde{score}$ for the (III) simulation option and outliers number p = 2\% }
+	\label{fig:scoretIIIp002}
+\end{figure}
+\begin{figure}[h!t]
+	\centering
+	\includegraphics[width=0.7\textwidth]{/Users/knight/dev/output/project_shrink/scoret_IVp002.pdf}
+	\caption[a]{Cumulative histograms of $\widetilde{score}$ for the (IV) simulation option and outliers number p = 2\% }
+	\label{fig:scoretIVp002}
+\end{figure}
+\\
+To examine the properties of the new shrinkage t-distribution, the same procedure was performed for the calculation of the shrinkage t-statistic. To simply the problem, we assume that the new shrinkage-t distribution is already a t-distribution. We're interested in which degrees of freedom ($dof$) has the new shrinkage t-distribution, so there are some approaches to estimate the degrees of freedom for the new distribution
+\begin{itemize}
+	\item The theoretical $dof$ of a t-distribution for the two samples case of t-test is $(N + N - 2)$.
+	\item Since it's been conversant that the variance and the degrees of freedom of a t-distribution is connected, that is $var = \frac{dof}{dof - 2}$. That means if we know about the variance of a t-distribution, we could backwards calculate the $dof$ as follow
+		\begin{equation*}
+			dof = \frac{2var}{var - 1}
+		\end{equation*}
+		With this formula, we calculate all the values of the new shrinkage t-distribution as the methods section described above, then compute the variance of all the values and subsequently the $dof$.
+	\item With a similar idea we calculate for each simulation the shrinkage t-statistic as a function of lambda and after 500 times repeated simulations the $dof$ was estimated from the function of lambda.
+\end{itemize}
+The cumulative distribution function of the shrinkage t-statistic and others cumulative distribution functions of the standard t-distribution with the theoretical, from variance estimated and from lambda estimated degrees of freedom were shown in \autoref{fig:tstatIIIp001} for the (III) simulation settings with 1\% outlines and in \autoref{fig:tstatIVp001} for the (IV) simulation settings with 1\% outlines.
+\begin{figure}[h!tp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{/Users/knight/dev/output/project_shrink/plot_tstatIII-p001.png}
+	\caption[a]{Cumulative distribution functions for the (III) simulation option and outliers number p = 1\% }
+	\label{fig:tstatIIIp001}
+\end{figure}
+\begin{figure}[h!tp]
+	\centering
+	\includegraphics[width=0.9\textwidth]{/Users/knight/dev/output/project_shrink/plot_tstatIV-p001.png}
+	\caption[a]{Cumulative distribution functions for the (IV) simulation option and outliers number p = 1\% }
+	\label{fig:tstatIVp001}
+\end{figure}

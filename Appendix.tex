@@ -1,0 +1,157 @@
+\section{Fundamental statistic} \label{appendixa}
+This section provides a few fundamental concept in the statistic, which are crucial to understanding any proof given in this paper.
+%%%%%%%%%
+\subsection{Expected value and variance}
+Some important properties of expected value and variance are related to this paper will be shown here.\\
+Suppose X, Y are independent random variables.
+\begin{align}
+E(\alpha X \pm \beta Y) & = \alpha E(X) \pm \beta E(Y) \label{eq:e} \\
+Var(\alpha X \pm \beta Y) & = \alpha^2 Var(X) + \beta^2 Var(Y) \label{eq:var}
+\end{align}
+\subsection{Sum of independent random variables}
+\begin{itemize}
+	\item Suppose X, Y are independent normal distributed random variables.
+	\begin{displaymath}
+		X \sim \mathcal {N}(\mu_X,\sigma_X^2)\,,\, Y \sim \mathcal {N}(\mu_Y,\sigma_Y^2)
+	\end{displaymath}
+	\begin{equation} \label{eq:sum-norm}
+		\Rightarrow Z = X \pm Y  \sim \mathcal {N}(\mu_X\pm\mu_Y,\sigma_X^2+\sigma_Y^2)\ 
+	\end{equation}
+	\item Suppose X, Y are independent chi-squared distributed random variables.
+	\begin{displaymath}
+		X \sim \chi_{\nu_X}^2\,,\, Y \sim \chi_{\nu_Y}^2
+	\end{displaymath}
+	\begin{equation} \label{eq:sum-chi}
+		\Rightarrow Z = X + Y  \sim \chi_{\nu_X+\nu_Y}^2 
+	\end{equation}
+\end{itemize}
+%%%%%%%%%
+\subsection{Student's t-distribution}
+Some statistical characterizations which are related to Student's t-distribution will be mentioned.\\
+Student's t-distribution is the probability distribution of the ratio
+\begin{equation} \label{eq:t-dist}
+	t = \frac{Z}{\sqrt{V/\nu\ }}
+\end{equation}
+\\
+where
+\begin{itemize}
+ 	\item Z $ \sim \mathcal {N}(0,1) $
+	\item V $ \sim\chi^2_{\nu} $
+ 	\item Z and V are statistical independence.
+\end{itemize}
+then the above ratio has a t-distribution with $\nu$ degrees of freedom.
+%%%%%%%%%
+\subsection{Fisher's F-distribution}
+The F-distribution is the ratio of two chi-squared variates
+\begin{equation} \label{eq:f-dist}
+	F = \frac{S_1 / d_1}{S_2 / d_2}
+\end{equation}
+where
+\begin{itemize}
+ 	\item $S_1$ and $S_2$ have chi-squared distributions with $d_1$ and $d_2$ degrees of freedom respectively, and
+ 	\item $S_1$ and $S_2$ are statistical independence.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section {Cochran's theorem} \label{appendixb}
+This section proves the Cochran's theorem in statistic, which is crucial to this paper. Cochran had proved in 1934 the central case of the theorem, the most important case in practice. \cite{madow} expanded the proof for the non-central case. \\
+This theorem is very helpful for quadratic forms of random variables. 
+\\
+\theoremstyle{definition} \newtheorem*{mytheo}{Cochran's theorem}
+
+\begin{mytheo}
+Suppose $X_n$ (n = 1 \ldots N) are independent normal distributed random variables and $Q_k$ (k = 1 \ldots K) have quadratic form in $\mathbb{R}^N$ with:
+
+\begin{displaymath}
+(a)
+\sum_{n=1}^N X_n^2= \sum_{k=1}^K Q_k
+\end{displaymath}
+and
+\begin{displaymath}
+(b) \, n_k \, \textrm{is the rank of} \, Q_k
+\end{displaymath}
+\\
+Then we have:
+\\
+i) If $\sum_{k=1}^K n_k = N$, then the $Q_k$ are independent, and each $Q_k$ has a chi-square distribution with $n_k$ degrees of freedom.
+\\
+ii) If the $Q_k$ are independent, and each $Q_k$ has a chi-square distribution with $n_k$ degrees of freedom, then $\sum_{j=1}^K n_j = N$
+\\
+
+\end{mytheo}
+
+\begin{proof} 
+The proof of this theorem will not be shown here, but rather refer the reader to another literature ~\citep{cochran}.
+\\
+\\
+To understand the conditions (a) and (b) of the theorem, let have a simple example:
+\\
+Suppose we have N independent normal distributed random variables $X_n$ (n = 1 \ldots N). Then with $Q_1 = \sum_{n=1}^{N-1} X_n^2$ and $Q_2 = X_N^2$ we'll have: 
+\begin{displaymath}
+\sum_{n=1}^N X_n^2 = Q_1 + Q_2
+\end{displaymath}
+Cochran's theorem states that $Q_1$ and $Q_2$ are independent, chi-square distributed with $N-1$ and 1 degrees of freedom respectively.
+
+\end{proof}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Fisher's theorem}\label{appendixc}
+It's maybe helpful for readers who never heard of Cochran's theorem, we'll also introduce the Fisher's theorem, which is known as the converse of Cochran's theorem.\\
+\begin{theorem}
+\emph{(Fisher's Theorem)}
+Let $A$ be a sum of squares of $N$ independent normal standardized variates $X_i$, and suppose $A=Q_1+Q_2$ where $Q_1$ is a quadratic form in the $X_i$, distributed as chi-squared with $H$ degrees of freedom. Then $Q_2$ is distributed as $\chi^2$ with $(N-H)$ degrees of freedom and is independent of $Q_1$.	
+\end{theorem}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section {Distribution of sample mean $\overline \mu$ and sample variance $\hat{\sigma}^2$ } \label{appendixd}
+
+Suppose $X_n$ (n = 1,...,N) are independent normally distributed random variables with mean $\mu$ and standard deviation $\sigma$.
+
+Sample mean and sample variance of $X_n$ (n = 1 \ldots N) are defined by following:
+\begin{equation}
+	\overline \mu = \frac{1}{N} \sum_{n=1}^N X_n
+\end{equation}
+\begin{equation}
+	\hat{\sigma}^2 = \frac{1}{N} \sum_{n=1}^N (X_n - \overline \mu)^2
+\end{equation}
+It's simple to show that:
+$ \sum_{n=1}^N X_n \sim \mathcal {N}(N\mu,N\sigma^2) $
+\begin{equation} \label{eq:smean}
+	\Rightarrow \overline \mu\sim \mathcal {N}(\mu,\frac{\sigma^2}{N})
+\end{equation}
+\begin{equation}
+	\Rightarrow \frac{(\overline \mu - \mu)\sqrt{N}}{\sigma} \sim \mathcal {N}(0,1)
+\end{equation}
+\\
+We have:
+
+$U_n = \frac {X_n - \mu}{\sigma} \sim \mathcal {N}(0,1) \, \forall n$.
+
+
+It is possible to write:
+
+\begin{align}
+	\sum_{n=1}^N U_n^2 & = \sum_{n=1}^N {\left( \frac {X_n - \mu}{\sigma}\right)}^2 = \sum_{n=1}^N {\left(\frac {X_n - \overline \mu + \overline \mu - \mu}{\sigma}\right)}^2 \nonumber \\
+	& = \sum_{n=1}^N {\left(\frac {X_n - \overline \mu}{\sigma}\right)}^2 + \sum_{n=1}^N {\left(\frac {\overline \mu - \mu}{\sigma}\right)}^2 + \sum_{n=1}^N 2{\left( \frac {(X_n - \overline \mu)(\overline \mu - \mu)}{\sigma^2} \right)} \nonumber 
+\end{align}
+
+The second term $= N{(\frac {\overline \mu - \mu}{\sigma})}^2$
+
+The third term
+\begin{align}
+	& = 2\sum_{n=1}^N {\left(\frac {X_n \overline \mu - X_n \mu - {\overline \mu}^2 + \overline \mu \mu}{\sigma^2}\right)} = 2 {\left( \frac {\sum X_n \overline \mu -  \sum X_n \mu - N{\overline \mu}^2 + N\overline \mu \mu}{\sigma^2} \right)} \nonumber \\
+	& = 2 {\left( \frac {N{\overline \mu}^2 -  N\overline \mu\mu - N{\overline \mu}^2 + N\overline \mu \mu}{\sigma^2} \right)} = 0\nonumber
+\end{align}
+so
+\begin{equation}
+	\sum_{n=1}^N U_n^2 = \sum_{n=1}^N {(\frac {X_n - \overline \mu}{\sigma})}^2 + N{(\frac {\overline \mu - \mu}{\sigma})}^2 = Q_1 + Q_2
+\end{equation}
+Cochran's theorem states that $Q_1$ and $Q_2$ are independent, chi-square distributed with $N-1$ and 1 degrees of freedom respectively.\\
+\begin{align}
+	\hat{\sigma}^2 & = \frac{1}{N} \sum_{n=1}^N (X_n - \overline \mu)^2 = Q_1\frac{\sigma^2}{N} \nonumber \\
+	& \Rightarrow N \frac{\hat{\sigma}^2}{\sigma^2} \sim\chi^2_{N-1} \label{eq:svar}
+\end{align}
+The unbiased estimator of sample variance:
+\begin{align}
+	\hat{\sigma}_{N-1}^2 & = \frac{1}{N-1} \sum_{n=1}^N (X_n - \overline \mu)^2 = Q_1\frac{\sigma^2}{N-1} \nonumber \\
+	& \Rightarrow (N-1) \frac{\hat{\sigma}_{N-1}^2}{\sigma^2} \sim\chi^2_{N-1} \label{eq:svar-unbias}
+\end{align}
+This shows that the sample mean and sample variance are independent; and this property characterizes the normal distribution. No other distribution have the sample mean and sample variance are independent.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

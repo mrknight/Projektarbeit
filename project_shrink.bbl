@@ -1,0 +1,116 @@
+\begin{thebibliography}{}
+
+\bibitem[Boldrick et~al., 2002]{Boldrick:2002p2425}
+Boldrick, J.~C., Alizadeh, A.~A., Diehn, M., Dudoit, S., Liu, C.~L., Belcher,
+  C.~E., Botstein, D., Staudt, L.~M., Brown, P.~O., and Relman, D.~A. (2002).
+\newblock Stereotyped and specific gene expression programs in human innate
+  immune responses to bacteria.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 99(2):972--7.
+
+\bibitem[Dudoit et~al., 2003]{Dudoit:2003p3}
+Dudoit, S., Shaffer, J., and Boldrick, J. (2003).
+\newblock Multiple hypothesis testing in microarray experiments.
+\newblock {\em Statistical Science}, 18(1):71--103.
+
+\bibitem[Efron et~al., 1973]{Efron:1973p2500}
+Efron, B., Morris, C., Efron, B., and Morris, C. (1973).
+\newblock Stein's estimation rule and its competitors--an empirical bayes
+  approach.
+\newblock {\em Journal of the American Statistical Association}.
+
+\bibitem[Golub et~al., 1999]{Golub:1999p14}
+Golub, T.~R., Slonim, D.~K., Tamayo, P., Huard, C., Gaasenbeek, M., Mesirov,
+  J.~P., Coller, H., Loh, M.~L., Downing, J.~R., Caligiuri, M.~A., Bloomfield,
+  C.~D., and Lander, E.~S. (1999).
+\newblock Molecular classification of cancer: class discovery and class
+  prediction by gene expression monitoring.
+\newblock {\em Science}, 286(5439):531--7.
+
+\bibitem[Hausser and Strimmer, 2009]{Hausser:2009p33}
+Hausser, J. and Strimmer, K. (2009).
+\newblock Entropy inference and the james-stein estimator, with application to
+  nonlinear gene association networks.
+\newblock {\em J Mach Learn Res}, 10:1469--1484.
+
+\bibitem[Kadota et~al., 2008]{Kadota:2008p275}
+Kadota, K., Nakai, Y., and Shimizu, K. (2008).
+\newblock A weighted average difference method for detecting differentially
+  expressed genes from microarray data.
+\newblock {\em Algorithms for molecular biology : AMB}, 3:8.
+
+\bibitem[Ledoit and Wolf, 2003]{Ledoit:2003p2496}
+Ledoit, O. and Wolf, M. (2003).
+\newblock Improved estimation of the covariance matrix of stock returns with an
+  application to portfolio selection.
+\newblock {\em Journal of Empirical Finance}, 10(5):603--621.
+
+\bibitem[Lindley et~al., 1972]{Lindley:1972p2501}
+Lindley, D.~V., Smith, A. F.~M., Lindley, D.~V., and Smith, A. F.~M. (1972).
+\newblock Bayes estimates for the linear model.
+\newblock {\em Journal of the Royal Statistical Society. Series B
+  (Methodological)}.
+
+\bibitem[Madow, 1940]{madow}
+Madow, W.~G. (1940).
+\newblock Limiting distributions of quadratic and bilinear forms.
+\newblock {\em Ann. Math. Statist.}, 11(2):125--146.
+
+\bibitem[Opgen-Rhein and Strimmer, 2007]{OpgenRhein:2007p11}
+Opgen-Rhein, R. and Strimmer, K. (2007).
+\newblock Accurate ranking of differentially expressed genes by a
+  distribution-free shrinkage approach.
+\newblock {\em Stat Appl Genet Mol Biol}, 6:Article9.
+
+\bibitem[Schach, 1978]{cochran}
+Schach, S. (1978).
+\newblock {\em Regressions- und Varianzanalyse, Eine Einfuehrung}.
+\newblock Springer.
+
+\bibitem[Schafer and Strimmer, 2005]{Schafer:2005p1040}
+Schafer, J. and Strimmer, K. (2005).
+\newblock A shrinkage approach to large-scale covariance matrix estimation and
+  implications {\ldots}.
+\newblock {\em Statistical applications in genetics and {\ldots}}.
+
+\bibitem[Stein, 1955]{Stein:1955p2498}
+Stein, C. (1955).
+\newblock Inadmissibility of the usual estimator for the mean of a multivariate
+  normal distribution.
+\newblock {\em Proceedings of the Third Berkeley symposium on mathematical
+  statistics and probability}, 1:197--206.
+
+\bibitem[Thompson and Thompson, 1968]{Thompson:1968p2499}
+Thompson, J.~R. and Thompson, J.~R. (1968).
+\newblock Some shrinkage techniques for estimating the mean.
+\newblock {\em Journal of the American Statistical Association}.
+
+\bibitem[Tibshirani, 2007]{Tibshirani:2007p29}
+Tibshirani, R. (2007).
+\newblock A comparison of fold-change and the t-statistic for microarray data
+  analysis.
+\newblock {\em stanford.edu}.
+
+\bibitem[Tusher et~al., 2001]{Tusher:2001p295}
+Tusher, V.~G., Tibshirani, R., and Chu, G. (2001).
+\newblock Significance analysis of microarrays applied to the ionizing
+  radiation response.
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 98(9):5116.
+
+\bibitem[Wikipedia, 2010a]{wiki:affy}
+Wikipedia (2010a).
+\newblock Affymetrix.
+\newblock \url{http://en.wikipedia.org/wiki/Affymetrix}.
+
+\bibitem[Wikipedia, 2010b]{wiki:microarray}
+Wikipedia (2010b).
+\newblock Dna microarray.
+\newblock \url{http://en.wikipedia.org/wiki/DNA_microarray}.
+
+\bibitem[Zhang, 2007]{zhang:2007}
+Zhang, A. (2007).
+\newblock {\em Advanced analysis of gene expression microarray data}.
+\newblock World Scientific.
+
+\end{thebibliography}

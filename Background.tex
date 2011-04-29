@@ -1,0 +1,109 @@
+\subsection{Microarray}
+First are some backgrounds on microarrays in general. According to the knowledge nowadays we all know that all the living organisms are composed of one or more cells, and cells are basic units of structure and function in an organism. Cells store their hereditary information (genome) in the form of chromosomes, which are large pieces of DNA containing hundreds of thousands genes, each gene specifies the composition and structure of a protein. All living organisms are composed largely of proteins, which are polymers (or a chain) of amino acids, are the workhouse molecules of the cell, for example, form part of a cellular structure itself, catalyze almost all the biochemical reactions in cell in form of enzymes, control the activity of other proteins, produce energy and important biomolecules like DNA and proteins. The information contained in DNA is first duplicated via the replication process, then transcribed in messenger RNA (mRNA). The mRNA is eventually processed in eukaryotic cells, then translated to synthesize new proteins.
+\\
+Every cell in an organism has nearly the same set of chromosomes, and thus contains the same supply of proteins. However cells do have remarkably distinct properties, for example liver cells, skin cells or heart cells. Those distinctions of cells are the result of differences in the abundance, distribution and state of the cell proteins. The changes in protein abundance are determined in part by changes in the levels of mRNA, speaks, which protein is synthesized in different state of cell, is dependent on that gene which encoded for the protein, is expressed. Thus there is a connection between the state of cell with his mRNA quantity. 
+\\
+DNA microarrays are high-throughput biological assays that can quickly and efficiently measure DNA or mRNA abundance in cells for thousands of genes simultaneously. There are two major kinds of microarrays, an oligonucleotide array which mostly produced from Affymetrix \citep{wiki:affy}, and a spotted cDNA microarray, which are very different in designs and need to be corresponding processed in the next steps before receiving the needing expression values. The details on different microarray designs will not be mentioned here but rather refer to the readers to extending sources \citep{wiki:microarray}.
+\\
+After all of those preprocessing, normalization and summarization steps, from either type of microarray we obtain several thousand expression values, one or many for each gene.
+With the given values, we need to identify those genes which demonstrate a significant change in expression level under the impact of certain experimental conditions, such as the cancerous tumors. Those genes, which are differentially expressed in one set of samples relative to another, could be used to understand the potentially meaningful correlations between genes and specific conditions (e.g. which genes are expressed in tumor issues but not in normal state). Moreover, genes which are not differential expressed could be filtered out to reduce the effort of further details analysis. Although simple in principle, the identification of differential expressed genes could be complex in practice, as many problems arise as we already mentioned in the introduction part.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\subsection{Student's t-test}
+To understand the reason of using the Student's t-test in differential expression data analysis, it's best to have a simple example of a typical microarray experiment. The example below was taken from ~\citep{zhang:2007} to show the readers a real application of microarrays.
+\\
+Suppose we are interested in identifying which genes are involved in multiple sclerosis diseases and after the drug treatment. The given data are samples taken from 14 multiple sclerosis patients, contain the expression levels of 4,132 genes for each patient prior to and 24 hours after interferon-$\beta$ treatment. We have two groups of samples with each group contains 14 samples, the first group indicate the samples were taken before the treatment and the second group is corresponding to post-treatment condition.
+\\[1ex]
+How could we answer the interested question of differential expressed genes? Let observe one gene, for example gene $i$ from the given data. We should have for gene $i$ two groups of samples, within each group are 14 samples. If gene $i$ was involved in some pathways of multiple sclerosis and was required to activate in the drug treatment condition, the RNA-$Polymerase$ binds at the specific transcription factor and gene $i$ was hereby transcribed. Therefore the mRNA amount specifies for gene $i$ was changed between two conditions, prior and after the drug treatment. Typically, the first attempt to analyze differentially-expressed genes simply calculated the average expression over all samples in each group, then divided the two average expression values. A fixed cut-off $k$ was chosen and if gene $i$ have the quotient of average expression values over $k$, then declare that gene $i$ is differential expressed. This so-called fold change method is very simple, just considering those genes which demonstrate a significant change between the experiment samples of particular interest (in this example was the interferon-$\beta$ treatment for multiple sclerosis) and control. A $k$ threshold was typically chosen as a two or three-fold change, dependent on experiments, and often arbitrary and did not take into account the overall distribution of the samples.
+\begin{definition}
+	Let's denote $\overline x_1$ the average expression values from the control group and $\overline x_2$ the average expression values from the treatment group. The fold change ratio is defined as $\frac{\overline x_1}{\overline x_2}$. \\[1ex]
+	In microarrays data analysis, where the measurements mostly needed to transform to have the nearly same property of a normal distribution, another widely used variant is using logarithm transformation of the data, then using the average log fold change difference. \\[1ex]
+	Let's denote $\overline y_1$ the average {\it log} expression values from the control group and $\overline y_2$ the average {\it log} expression values from the treatment group. The average fold change difference is then defined as $\overline y_1 - \overline y_2$. \
+\end{definition}
+It worths to mention that the two variants of fold change (fold change ratio and average log fold change) are sometimes misused as exchangeable in microarray analysis, but they have difference in their mathematical definition, and also differ in results as well. Nevertheless their difference in definition is small and the difference in results is also not significant as well. An excellent work of \cite{Tibshirani:2007p29} concerns about this problem and was highly recommended.
+\\
+Someone with statistical knowledge should already know those problems were yet considered in statistic. The Student's t-test is a standard statistical hypothesis test for detecting significant change of a variable between repeated measurements in two groups. The test follows a Student's t distribution if the null hypothesis is supported. It is most commonly applied when the test statistic would follow a normal distribution if the value of a scaling term in the test statistic were known. When the scaling term is unknown and is replaced by an estimate based on the data, the test statistic (under certain conditions) follows a Student's t distribution.
+To understand why the t-test is more sophisticated than the simply fold-change method, we begin with the derivation of t-test for the most simple case, the one-sample t-test. 
+\subsubsection{\it One-sample t-test}
+%%%%%%%
+\begin{definition}
+	Suppose we have samples from a normally distributed population. We are interested in testing the null hypothesis that the population mean is equal to a specified value $\mu_0$.\\
+	Let's denote N samples of the population as $x_1, x_2, ..., x_N$. \\
+	The assumption is that $x_i$ independent normally distributed with mean $\mu$ and variance $\sigma^2$ for all $i$: $x_i \sim \mathcal {N}(\mu,\sigma^2) \, \forall i$.
+	\\	
+	The sample mean and the unbiased sample variance of the population are defined as follow:
+	\begin{align*}
+		\overline \mu 			& = \frac{1}{N} \sum_{n=1}^N x_n \\
+		\hat{\sigma}^2_{N-1} 	& = \frac{1}{N-1} \sum_{n=1}^N (x_n - \overline \mu)^2
+	\end{align*}
+	The t-statistic is defined as:
+	\begin{equation} \label{eq:t-one}
+		t = \frac{\overline \mu - \mu_0}{\hat{\sigma}^2_{N-1}} \sqrt{N}
+	\end{equation}
+	If the null hypothesis is true ($H_0: \mu = \mu_0$), then the t-statistic is t-distributed with (N-1) degrees of freedom.
+\end{definition}
+%%%%%%%
+\begin{proof}
+	As already shown in \autoref{appendixd}, the sample mean has the following distribution (\autoref{eq:smean})
+	\begin{equation}
+		\Rightarrow \overline \mu\sim \mathcal {N}(\mu,\frac{\sigma^2}{N}) \nonumber
+	\end{equation}
+	\begin{equation}
+		\Rightarrow \frac{(\overline \mu - \mu)\sqrt{N}}{\sigma} \sim \mathcal {N}(0,1) \nonumber
+	\end{equation}
+	Analog with the unbiased sample variance (\autoref{eq:svar-unbias})
+	\begin{equation}
+		(N-1) \frac{\hat{\sigma}_{N-1}^2}{\sigma^2} \sim\chi^2_{N-1} \nonumber
+	\end{equation}
+	Let Z = $\frac{(\overline \mu - \mu)\sqrt{N}}{\sigma} \sim \mathcal {N}(0,1) $ \\
+	Let V = $(N-1) \frac{\hat{\sigma}_{N-1}^2}{\sigma^2} \sim\chi^2_{N-1}$ \\
+	Let
+	\begin{equation}
+		t = \frac{Z}{\sqrt{V/(N-1)} } = \frac{ \frac{(\overline \mu - \mu)\sqrt{N}}{\sigma} }{ \sqrt{(N-1) \frac{\hat{\sigma}_{N-1}^2}{\sigma^2} / (N-1)} } = 
+		\frac{\overline \mu - \mu}{\hat{\sigma}^2_{N-1}} \sqrt{N} \nonumber
+	\end{equation}	
+	If the null hypothesis is true ($H_0: \mu = \mu_0$), we see that is the same t from \autoref{eq:t-one}, and this statistic is t-distributed with (N-1) degrees of freedom. (\autoref{eq:t-dist})
+\end{proof}
+This one-sample t-test could be used for paired data, e.g. the data set from the above example, which has {\it biological replicates}, that means each data points has a pair of measurements, one prior to (control) and one after the treatment, The pair of measurements combine to a single log ratio. In this case, the observed measurements for each gene form one vector of log ratios, and the paired t-test is reduced to a one-sample t-test. Here, the null hypothesis that the gene is not differential-expressed is the same as that the mean of the log ratios $\mu$ equals to 0, denoted by $H_0: \mu = 0$. The t-statistic is calculated as follow:
+\begin{equation}
+	t = \frac{\overline \mu}{\hat{\sigma}_{N-1}}\sqrt{N} \nonumber
+\end{equation}
+where $\overline \mu$ is the average of the log ratios, $\hat{\sigma}_{N-1}$ is the (unbiased) standard deviation from the log ratios, and N is the number of samples.\\
+A p-value and a t-value can then be obtained by looking up a t-distribution with (N-1) degrees of freedom, and the null-hypothesis is rejected if the t-statistic is larger then the obtained t-value, based on the p-value.
+\subsubsection{\it Two-sample t-test}
+The two-sample t-test tests the null hypothesis that the means of two normally distributed populations are equal. As two populations show up, two-sample t-test may has {\it equal-variance} and {\it unequal-variance}.
+All such tests are usually called Student's t-test, though {\it strictly} speaking the name Student's t-test originally was used if the variances of the two populations are also assumed to be equal; and the form of the test used when the variance is unequal is sometimes called {\it Welch's t-test}. These tests are often referred to as "unpaired" or "independent samples" t-tests, as they are typically applied when the statistical units underlying the two samples being compared are non-overlapping. Since {\it Welch's t-test} is a generalization of Student's t-test, we'll introduce this test here.
+\begin{definition}
+	The t-statistic for all two-sample t-test could be calculated as follow:
+	\begin{equation} \label{eq:welch-t}
+		t = \frac	{\overline \mu_1 - \overline \mu_2}
+					{ \sqrt{ \frac{\hat{\sigma_1}^2}{N_1} + \frac{\hat{\sigma_2}^2}{N_2} } } 
+	\end{equation}
+	where analog in the one-sample case, $\overline \mu_1$ and $\overline \mu_2$ are the means, $\hat{\sigma_1}^2$ and $\hat{\sigma_2}^2$ are the variances, and $N_1$ and $N_2$ are the samples sizes of two populations, respectively.\\
+	This t-statistic is then t-distributed with $df$ degrees of freedom.	
+	In the case of unequal variance, the {\it degrees of freedom} need to be adjusted as:
+	\begin{equation} \label{eq:dof}
+		df	= \frac	{\left( \frac{\hat{\sigma_1}^2}{N_1} + \frac{\hat{\sigma_2}^2}{N_2}\right)^2}
+					{ \frac{ (\frac{\hat{\sigma_1}^2}{N_1})^2 }{N_1-1} + \frac{ (\frac{\hat{\sigma_2}^2}{N_2})^2 }{N_2-1}}
+	\end{equation}
+	Note that the value of $df$ is usually not an integer and need to be truncated.\\
+	The derivation of the two-sample t-test will not be shown in this paper. \\
+\end{definition}
+In the most cases of microarray data analysis, the samples sizes is typically very small ($N_1, N_2 < 5$), then the {\it pooled sample variance} $\hat{\sigma_p}^2$ is often used to estimate the sample variability instead of the variances for each group. The \autoref{eq:welch-t} reduces to:
+\begin{equation} \label{eq:student-t}
+	t = \frac	{\overline \mu_1 - \overline \mu_2}
+				{ \sqrt{\hat{\sigma_p}^2 \left(\frac{1}{N_1} + \frac{1}{N_2} \right)} }
+\end{equation}
+where 
+\begin{equation} \label{eq:pool-var}
+	\hat{\sigma_p}^2 = \frac	{(N_1 - 1)\hat{\sigma_1}^2 + (N_2 - 1)\hat{\sigma_2}^2}
+								{N_1 + N_2 - 2} 
+\end{equation}
+This t-statistic from \autoref{eq:student-t} is then t-distributed with $df = (N_1 + N_2 - 2)$ degrees of freedom.\\
+In the case of the same sample sizes of two groups ($N_1 = N_2 = N$), the t-statistic reduces to:
+\begin{equation} \label{eq:student-t-equal}
+	t = \frac{\overline \mu_1 - \overline \mu_2}{\hat{\sigma_p}^2} \sqrt{N} 
+\end{equation}
+As we can see in comparing the above equation of the simplified t-statistic with the average log fold change difference, the two definitions distinguish only in the denominator and a constant term ($\sqrt{N}$). The t-test is hence more sophisticated than the fold change method. The significance of the differentially expressed genes depends not only on the average difference but also on both the population variability and the number of individuals in the populations. In general, the accuracy of the successful determination increases with the number of samples.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{{\bf AN}alysis {\bf O}f {\bf VA}riance}
+	\input{ANOVA}

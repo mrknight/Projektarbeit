@@ -1,0 +1,47 @@
+This is BibTeX, Version 0.99d (TeX Live 2010)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: project_shrink.aux
+The style file: apalike.bst
+Database file #1: Projekt_shrinkage.bib
+Database file #2: Projekt_shrinkage_my.bib
+You've used 19 entries,
+            1935 wiz_defined-function locations,
+            594 strings with 7153 characters,
+and the built_in function-call counts, 7116 in all, are:
+= -- 680
+> -- 330
+< -- 12
++ -- 119
+- -- 112
+* -- 605
+:= -- 1295
+add.period$ -- 57
+call.type$ -- 19
+change.case$ -- 149
+chr.to.int$ -- 18
+cite$ -- 19
+duplicate$ -- 253
+empty$ -- 462
+format.name$ -- 141
+if$ -- 1339
+int.to.chr$ -- 2
+int.to.str$ -- 0
+missing$ -- 19
+newline$ -- 98
+num.names$ -- 57
+pop$ -- 121
+preamble$ -- 1
+purify$ -- 151
+quote$ -- 0
+skip$ -- 196
+stack$ -- 0
+substring$ -- 439
+swap$ -- 17
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 110
+warning$ -- 0
+while$ -- 55
+width$ -- 0
+write$ -- 240

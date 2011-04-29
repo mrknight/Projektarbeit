@@ -1,0 +1,127 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\it 2-groups One-Way ANOVA}
+There are so many introductions and motivations for ANOVA in the classic mathematical literature, in this work we'll try to introduce the $One-Way$ ANOVA approach as an extension of the standard t-test. As we already understand the standard t-test, it'll be easier to see the $One-Way$ ANOVA is simply an extension of t-test when we have more than two groups (or $levels$ in the ANOVA language). Another requirement of ANOVA which discriminative from t-test is in ANOVA is assumed that the variances are the same for all groups, which is often not the case in microarray analysis. But with some heuristic improvement, the ANOVA approach is still very useful in the praxis even without the same variances assumption. Besides that, the unequal variance problem in ANOVA approach was considered as a not trivial problem and it'll be not covered in this paper.\\
+Let's first review the two-samples t-test case to see which distribution has the $squared$ t-statistic. Let's denote 
+$x_{ij}$ the $j$-te measurement of $i$-te group. Group 1 and 2 has $N_1$ and $N_2$ samples respectively. We assume that those measurements of two groups come from a normal distribution with mean $\mu_1$, $\mu_2$  and same variance $\sigma^2$. The tested null hypothesis is $H_0: \mu_1 = \mu_2$. From \autoref{eq:welch-t} we have
+\begin{equation} 
+	t = \frac{\overline \mu_1 - \overline \mu_2}{ \sqrt{ \frac{\hat{\sigma_1}^2}{N_1} + \frac{\hat{\sigma_2}^2}{N_2} } } 
+\end{equation} 
+with $\hat{\sigma_1}^2$ and $\hat{\sigma_2}^2$ are the $unbiased$ sample variance of each group
+\begin{align*}
+	\hat{\sigma_1}^2 & = \frac{\sum_{j=1}^{N_1} (x_{1j} - \overline \mu_1)^2}{{N_1-1}} \\
+	\hat{\sigma_2}^2 & = \frac{\sum_{j=1}^{N_2} (x_{2j} - \overline \mu_2)^2}{{N_2-1}}	
+\end{align*}
+To ensure the same variances assumption, we define the {\it pooled sample variance} $\hat{\sigma_p}^2$
+\begin{equation} 
+	\hat{\sigma_p}^2 = \frac{(N_1 - 1)\hat{\sigma_1}^2 + (N_2 - 1)\hat{\sigma_2}^2}{N_1 - 1 + N_2 - 1}
+\end{equation} 
+The t-statistic becomes
+\begin{equation} 
+	t = \frac{\overline \mu_1 - \overline \mu_2}{ \sqrt{\hat{\sigma_p}^2 \left(\frac{1}{N_1} + \frac{1}{N_2}\right) } } 
+\end{equation} 
+We're interested in the squared t-statistic, which provide
+\begin{align*}
+	\Rightarrow t^2 & = \frac	{(\overline \mu_1 - \overline \mu_2)^2}
+								{\hat{\sigma_p}^2 \left( \frac{1}{N_1} + \frac{1}{N_2}\right) } \\
+					& = \frac	{ \frac	{(\overline \mu_1 - \overline \mu_2)^2}
+										{\sigma^2 \left( \frac{1}{N_1} + \frac{1}{N_2}\right)} }
+								{ \frac {\hat{\sigma_p}^2}
+								 		{\sigma^2} } \\
+					& = \frac{A}{B}
+\end{align*}
+The next step is to see which distribution has A and B. With A we have 
+\begin{align*}
+	E(\overline \mu_1 - \overline \mu_2) &= \mu_1 - \mu_2 = 0 \\
+	Var(\overline \mu_1 - \overline \mu_2) &= Var(\overline \mu_1) + Var(\overline \mu_2) = \frac{\sigma^2}{N_1} + \frac{\sigma^2}{N_2}\\
+	\Rightarrow (\overline \mu_1 - \overline \mu_2) 
+				&\sim \mathcal {N}(0, \sigma^2(\frac{1}{N_1} + \frac{1}{N_2}))\\
+	\Rightarrow \sqrt{A} = \frac{(\overline \mu_1 - \overline \mu_2)}
+								{\sqrt{(\frac{\sigma^2}{N_1} + \frac{\sigma^2}{N_2})}}
+				&\sim \mathcal {N}(0, 1)\\
+	\Rightarrow A &\sim \mathcal \chi^2_1
+\end{align*}
+With B
+\begin{align*}
+	B &= \frac 	{\hat{\sigma_p}^2}{\sigma^2} = 
+	     \frac	{ \frac	{(N_1 - 1)\hat{\sigma_1}^2 + (N_2 - 1)\hat{\sigma_2}^2}
+						{N_1 - 1 + N_2 - 1} }
+				{\sigma^2} \\
+	  &= \frac	{ (N_1-1)\frac{\hat{\sigma_1}^2}{\sigma^2} + (N_2-1)\frac{\hat{\sigma_2}^2}{\sigma^2} }{N_1-1+N_2-1}
+\end{align*}
+Since already known that $(N_1-1)\frac{\hat{\sigma_1}^2}{\sigma^2} \sim \chi^2_{N_1-1}$, $(N_2-1)\frac{\hat{\sigma_2}^2}{\sigma^2} \sim \chi^2_{N_2-1}$	(\autoref{eq:svar-unbias})
+\begin{align*}
+	\Rightarrow &(N_1-1)\frac{\hat{\sigma_1}^2}{\sigma^2} + (N_2-1)\frac{\hat{\sigma_2}^2}{\sigma^2} \sim \chi^2_{N_1+N_2-2} \text{ (\autoref{eq:sum-chi})} \\
+	\Rightarrow &\frac{\hat{\sigma_p}^2}{\sigma^2} \sim \chi^2_{N_1+N_2-2}/(N_1+N_2-2)
+\end{align*}
+From \autoref{eq:f-dist}
+\begin{align*}
+	t^2 = \frac{A}{B} = \frac{\chi^2_1 / 1}{\chi^2_{N_1+N_2-2} / (N_1+N_2-2)} \sim \mathcal {F}_{1, N_1+N_2-2}
+\end{align*}
+That's it! This above derivation could be considered as the construction of One-Way ANOVA for two groups. We'll also introduce some new definitions which are very well-known in the ANOVA concept, the {\it sum of squares} due to treatments (sum of squares "between groups") the sum of squares error (sum of squares "within groups" or "residuals") and their {\it mean squares}, after all rewrite the above derivation in the "real ANOVA language".\\
+From the individual sample mean of each group $\overline \mu_1$, $\overline \mu_1$, let's denote the {\it grand mean} of all groups as follow
+\begin{equation*}
+	\overline \mu 	= \frac	{ \sum^{N_1}_{j=1}{x_{1j}} + \sum^{N_2}_{j=1}{x_{2j}} }
+							{N_1 + N_2} 
+					= \frac{N_1}{N_1 + N_2}\overline \mu_1 + \frac{N_2}{N_1 + N_2}\overline \mu_2
+\end{equation*}
+The sum of squares {\it due to treatments} (or "between groups") is defined as follow
+\begin{equation*}
+	SS_{Treatment} 	= SST = \frac	{ (\overline \mu_1 - \overline \mu_2)^2 }
+							{ \frac{1}{N_1} + \frac{1}{N_2} } 
+					= N_1(\overline \mu_1 - \overline \mu)^2 + N_2(\overline \mu_2 - \overline \mu)^2
+\end{equation*}
+The mean squares of treatments is defined as the sum of squares divided by the {\it degrees of freedom} of treatments, which is the number of groups (in this case = 2 ) minus one.
+\begin{equation*}
+	MS_{Treatment} 	= MST = \frac	{ SS_{Treatment} }{ 2 - 1 }
+\end{equation*}
+The sum of squares {\it error} (or "within groups")
+\begin{equation*}
+	SS_{Error} = SSE	= (N_1 - 1)\hat{\sigma_1}^2 + (N_2 - 2)\hat{\sigma_2}^2
+						= \sum^{N_1}_{j=1}{(x_{1j}-\overline \mu_1)^2} 
+						+ \sum^{N_2}_{j=1}{(x_{2j}-\overline \mu_2)^2}
+\end{equation*}
+Accordingly the mean squares error
+\begin{equation*}
+	MS_{Error} 	= MSE 	= \frac	{ SS_{Error} }{ N_1 - 1 + N_2 - 1 }
+\end{equation*}
+The denominator of the above formula is the {\it degrees of freedom} of error itself.
+It's worths to mention that another term, the total sum of squares could be showed as the sum of the above two sums of squares.
+\begin{equation*}
+	S_{Total} 	= SS_{Treatment} + SS_{Error}
+\end{equation*}
+The F-statistic of the 2-groups ANOVA is defined as
+\begin{equation*}
+	F = \frac{MS_{Treatment}}{MS_{Error}} = t^2 \sim \frac{\chi^2_1/1}{\chi^2_{N_1+N_2-2}/(N_1+N_2-2)} \sim \mathcal {F}_{1, N_1+N_2-2}
+\end{equation*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{\it K-groups One-Way ANOVA}
+It's not too hard to extend the One-Way ANOVA approach from two groups to $K$-groups. With each group $i$ has their individual number of sample $N_i$ itself, we define first the total number of measurements of the experiment
+\begin{equation}
+	N = \sum^K_{i=1}{N_i}
+\end{equation}
+The grand mean
+\begin{equation}
+	\overline \mu 	= \frac	{ \sum^{K}_{i=1}\sum^{N_i}_{j=1}{x_{ij}} }
+							{\sum^K_{i=1}{N_i}} 
+					= \frac	{ \sum^{K}_{i=1}\sum^{N_i}_{j=1}{x_{ij}} }{N}
+\end{equation}
+Another terms are analog to the two-groups case.
+\begin{align} 
+	\label{eq:SST}
+	SS_{Treatment} 	&= \sum^K_{i=1}N_i(\overline \mu_i - \overline \mu)^2 \\
+	\label{eq:MST}
+	MS_{Treatment} 	&= \frac{ SS_{Treatment} }{ K - 1 } \\
+	\label{eq:SSE}
+	SS_{Error} 		&= \sum^K_{i=1}(N_i - 1)\hat{\sigma_i}^2 \\
+	\label{eq:MSE}
+	MS_{Error} 		&= \frac{ SS_{Error} }{ \sum^K_{i=1}(N_i - 1) }	= \frac{ SS_{Error} }{ N - K }	
+\end{align}
+Again the formula's still valid
+\begin{equation*}
+	S_{Total} 	= SS_{Treatment} + SS_{Error}
+\end{equation*}
+Similarly the F-statistic of the $K$-groups ANOVA is defined as
+\begin{equation}
+	F = \frac{MS_{Treatment}}{MS_{Error}} \sim \frac{\chi^2_{K-1}/{K-1}}{\chi^2_{N-K}/(N-K)} \sim \mathcal {F}_{K-1, N-K}
+\end{equation}
+The true null hypothesis is $H_0: \mu_1 = \mu_2 = ... = \mu_K$, then the F-statistic is F-distributed with $(K-1)$ and $(N-K)$ degrees of freedom.

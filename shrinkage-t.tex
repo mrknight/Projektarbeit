@@ -1,0 +1,45 @@
+In context of microarray study, the most well-known problem is how to obtain a stable estimator of gene-specific variances. We'll show in detail how the shrinkage rule is applied in microarray data analysis.\\
+From given data of one group with P genes, let's denote $x_{ij}$ the $j$-th measurement of gene $i$ $(i = 1..P, j = 1..N)$. In statistical context, that means $x_{ij}$ is the $j$-th observation of the random variable $X_i$. The corresponding sample mean of gene $i$ is defined as $\overline{x}_i = \frac{1}{N}\sum^N_j{x_{ij}}$. \\
+Now set $w_{ij} = (x_{ij} - \overline{x}_i)^2$ and $\overline{w}_i = \frac{1}{N}\sum^N_j{(x_{ij} - \overline{x}_i)^2} = \frac{1}{N}\sum^N_j{w_{ij}}$. All the $w_{ij}$ can be seen as $j$-th sample of the random variable $W_i$ with $W_i = (X_i - \overline{X})^2$ and their sample mean is $\overline{w}_i$.\\
+The unbiased empirical variances $v_i$ of each gene $i$ equals
+\begin{equation}
+	v_i = Var(X_i) = \frac{1}{N-1}\sum^N_j{(x_{ij} - \overline{x}_i)^2} = \frac{N}{N-1}\overline{w}_i
+\end{equation}
+$\forall i = 1..P$\\ \\
+In the standard t-test, these variances were used in calculating the t-statistic (\autoref{eq:student-t}). However, in microarray data where the sample size is limited (typically smaller than 10 samples per group) those variances were shown to be very unstable which lead to false detection of differential-expressed genes (variance which too small in the denominator of t-statistic leads to large test statistic). The shrinkage rule improves the classical variance estimator as follow:\\
+These variances provide the components for the unregularized estimator $\hat \theta$ for the shrinkage rule (\autoref{eq:srule}). The next step is chosen an appropriate shrinkage target. Similar to the example case, one could consider to shrink towards zero or towards the mean of the empirical variances. However, these two alternative targets are either less efficient (zero target) or less robust (mean target). We taken the suggestion from \cite{OpgenRhein:2007p11} and shrink towards the median value $v_{median}$ of all $v_i$.\\
+The optimal estimated shrinkage intensity was calculated as follow
+\begin{align*}
+	\hat \lambda^\star &= \frac{\sum^P_{i=1}\widehat{Var}(\hat \theta_i) - \widehat{Cov}(\hat \theta_i, \hat \theta_i^{Target}) + (\hat \theta_i - \hat \theta_i^{Target})\widehat{Bias}(\hat \theta_i)}{\sum^P_{i=1}(\hat \theta_i - {\hat \theta_i}^{Target})^2} \\
+	&= \frac{\sum^P_{i=1}\widehat{Var}(v_i) - \widehat{Cov}(v_i, v_{median}) + (v_i - v_{median})\widehat{Bias}(v_i)}{\sum^P_{i=1}(v_i - v_{median})^2}
+\end{align*}
+Since the empirical variance $v_i$ is unbiased, $Bias(v_i) = 0$. Furthermore, the approximation $\widehat{Cov}(v_i, v_{median}) \approx 0$ could be use as well for simplicity. We obtain
+\begin{equation} \label{eq:lambda_st1}
+	\hat \lambda^\star = \frac{\sum^P_{i=1}\widehat{Var}(v_i)}{\sum^P_{i=1}(v_i - v_{median})^2}
+\end{equation}
+If $\hat \lambda^\star$ has a small value, that means little shrinkage occurs, in opposition when $\hat \lambda^\star$ is large, more shrinkage takes place. As we could see from the numerator of the \autoref{eq:lambda_st1}, it could determine whenever $\hat \lambda^\star$ small or large. The numerator is the sum of all $\widehat{Var}(v_i)$, which is small if the empirical variances $v_i$ could be reliably determined from the data, consequently there will be little shrinkage. In opposite, if $\widehat{Var}(v_i)$ is large which means the estimation of the empirical variances is not reliable, then the shrinkage procedure pooling across genes will take place. Furthermore, the denominator is an estimate of the mis-specification between the target and the $v_i$. If the target is incorrectly chosen, the denominator tends to very large which consequently minimize the $\hat \lambda^\star$ towards zero, hence, no shrinkage will occur.\\
+A sample version of $\widehat{Var}(v_i)$ could be calculated as follow
+\begin{align*}
+	\widehat{Var}(v_i) &= \widehat{Var}(\frac{N}{N-1}\overline{w}_i) = \frac{N^2}{(N-1)^2}\widehat{Var}(\overline{w}_i) \\
+	&= \frac{N^2}{(N-1)^2}\widehat{Var}(\frac{1}{N}\sum^N_j{w_{ij}}) = \frac{1}{(N-1)^2}\widehat{Var}(\sum^N_j{w_{ij}}) \\
+	&= \frac{1}{(N-1)^2}\sum^N_j\widehat{Var}({w_{ij}})
+\end{align*}
+Since $\widehat{Var}(w_{ij})$ could be calculated as the unbiased sample variance of $W_i$, ( $=\frac{1}{N-1}\sum^N_{k=1}(w_{ik} - \overline{w}_i)^2,\forall i=1..N$), we obtain
+\begin{equation*}
+	\widehat{Var}(v_i) = \frac{1}{(N-1)^2}\sum^N_j\left(\frac{1}{N-1}\sum^N_{k=1}(w_{ik} - \overline{w}_i)^2 \right) = \frac{N}{(N-1)^3}\sum^N_{k=1}(w_{ik} - \overline{w}_i)^2
+\end{equation*}
+Insert in \autoref{eq:lambda_st1}
+\begin{equation} \label{eq:lambda_st2}
+	\Rightarrow \hat \lambda^\star = \frac{\frac{N}{(N-1)^3}\sum^P_{i=1}\sum^N_{k=1}(w_{ik} - \overline{w}_i)^2}{\sum^P_{i=1}(v_i - v_{median})^2}	
+\end{equation}
+The shrinkage estimator for sample variance for the $i$-th gene is straightforward to compute
+\begin{equation} \label{eq:shrink_var}
+	v^\star_i = \hat \lambda^\star v_{median} + (1-\hat \lambda^\star)v_i
+\end{equation}
+\\[1ex]
+With the above framework, the new statistic, the "shrinkage t" statistic, is obtained from the suggestion of \cite{OpgenRhein:2007p11} by simply plugging the shrinkage variance estimator (\autoref{eq:lambda_st2} and \autoref{eq:shrink_var} into the ordinary statistic. \\
+Let's denote $N_1$ and $N_2$ as the sample sizes of group 1 (e.g. treatment group) and group 2 (e.g. control group), we could compute the shrinkage variance estimator for each group with two different shrinkage intensities $\hat \lambda^\star_1$ and $\hat \lambda^\star_2$, let's denote as $v^\star_i$ and $u^\star_i$ respectively. The sample mean of each group are $\overline{x}_i$ and $\overline{y}_i$. The shrinkage t-statistic for detecting differential-express of gene $i$ is given by
+\begin{equation} \label{eq:shrink-t}
+	t^\star_i = \frac{\overline{x}_i - \overline{y}_i}{\sqrt{ \frac{v^\star_i}{N_1} + \frac{u^\star_i}{N_2} }}
+\end{equation}
+Similar to the standard t statistic, one can consider to have a pooling shrinkage variance estimator for both groups (i.e. with one common shrinkage intensity) and plug it in the above equation as well.

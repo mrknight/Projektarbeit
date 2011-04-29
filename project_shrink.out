@@ -1,0 +1,36 @@
+\BOOKMARK [1][-]{section.1}{Introduction}{}% 1
+\BOOKMARK [1][-]{section.2}{Background}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Microarray}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Student's t-test}{section.2}% 4
+\BOOKMARK [3][-]{subsubsection.2.2.1}{One-sample t-test}{subsection.2.2}% 5
+\BOOKMARK [3][-]{subsubsection.2.2.2}{Two-sample t-test}{subsection.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{ANalysis Of VAriance}{section.2}% 7
+\BOOKMARK [3][-]{subsubsection.2.3.1}{2-groups One-Way ANOVA}{subsection.2.3}% 8
+\BOOKMARK [3][-]{subsubsection.2.3.2}{K-groups One-Way ANOVA}{subsection.2.3}% 9
+\BOOKMARK [1][-]{section.3}{Shrinkage concept}{}% 10
+\BOOKMARK [2][-]{subsection.3.1}{James \046 Stein shrinkage rule}{section.3}% 11
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Introduction}{subsection.3.1}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Derivation of shrinkage rule}{subsection.3.1}% 13
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Estimation of the optimal shrinkage intensity}{subsection.3.1}% 14
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Example}{subsection.3.1}% 15
+\BOOKMARK [2][-]{subsection.3.2}{The shrinkage-t statistic}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.3}{The shrinkage-ANOVA}{section.3}% 17
+\BOOKMARK [1][-]{section.4}{Shrinkage-t simulation}{}% 18
+\BOOKMARK [2][-]{subsection.4.1}{Simulation settings}{section.4}% 19
+\BOOKMARK [2][-]{subsection.4.2}{Choices of the target}{section.4}% 20
+\BOOKMARK [2][-]{subsection.4.3}{Methods of evaluation}{section.4}% 21
+\BOOKMARK [2][-]{subsection.4.4}{Result}{section.4}% 22
+\BOOKMARK [1][-]{section.5}{Shrinkage-ANOVA simulation}{}% 23
+\BOOKMARK [2][-]{subsection.5.1}{Simulation settings}{section.5}% 24
+\BOOKMARK [2][-]{subsection.5.2}{Choices of the target}{section.5}% 25
+\BOOKMARK [2][-]{subsection.5.3}{Methods of evaluation}{section.5}% 26
+\BOOKMARK [2][-]{subsection.5.4}{Result}{section.5}% 27
+\BOOKMARK [1][-]{section.6}{Discussion}{}% 28
+\BOOKMARK [1][-]{appendix.A}{Fundamental statistic}{}% 29
+\BOOKMARK [2][-]{subsection.A.1}{Expected value and variance}{appendix.A}% 30
+\BOOKMARK [2][-]{subsection.A.2}{Sum of independent random variables}{appendix.A}% 31
+\BOOKMARK [2][-]{subsection.A.3}{Student's t-distribution}{appendix.A}% 32
+\BOOKMARK [2][-]{subsection.A.4}{Fisher's F-distribution}{appendix.A}% 33
+\BOOKMARK [1][-]{appendix.B}{Cochran's theorem}{}% 34
+\BOOKMARK [1][-]{appendix.C}{Fisher's theorem}{}% 35
+\BOOKMARK [1][-]{appendix.D}{Distribution of sample mean \040and sample variance 2 }{}% 36

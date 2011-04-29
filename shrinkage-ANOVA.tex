@@ -1,0 +1,69 @@
+We're given the data of $K$-groups. An example from microarray analysis context might be 3 groups data with one control group, two treatments groups in which one for drug treatment and another one for another drug treatment. Each group should have their own sample size $N_k$.\\
+Let's denote $x^{(k)}_{ij}$ the $j$-th measurement of gene $i$ from group $k$ $(i = 1..P, j = 1..N_k, k = 1..K)$. We define those following terms:
+\begin{itemize}
+	\item Sample mean of gen $i$ for group $k$
+	\begin{equation*}
+		\overline \mu_i^{(k)} = \frac{1}{N_k}\sum^{N_k}_j{x^{(k)}_{ij}}
+	\end{equation*}
+	\item The grand mean of gen $i$ for all groups.
+	\begin{equation*}
+		\overline \mu_i = \frac	{\sum^K_{k=1}\sum^{N_k}_{j=1}x^{(k)}_{ij}}
+								{\sum^K_{k=1}N_k}
+						= \frac	{\sum^K_{k=1}\sum^{N_k}_{j=1}x^{(k)}_{ij}}
+								{N}
+	\end{equation*}
+	\item To calculate $v^{(k)}_i$ the unbiased sample variance of gene $i$ for group $k$, we first define
+	\begin{align*}
+		w^{(k)}_{ij} 			&= (x^{(k)}_{ij} - \overline \mu_i^{(k)})^2 \\
+		\overline{w}^{(k)}_i 	&= \frac{1}{N_k}\sum^{N_k}_j{(x^{(k)}_{ij} - \overline \mu_i^{(k)})^2} 
+								= \frac{1}{N_k}\sum^{N_k}_j{w^{(k)}_{ij}}
+	\end{align*}	
+	Then
+	\begin{equation*}
+		v^{(k)}_i = \frac{1}{N_k-1}\sum^{N_k}_j{(x^{(k)}_{ij} - \overline \mu_i^{(k)})^2} 
+					= \frac{N_k}{N_k-1}\overline{w}^{(k)}_i
+	\end{equation*}		
+	\item $v^{(k)}_{target}$ as the target of shrinkage rule of $v^{(k)}_i \forall i$, for group k.
+\end{itemize}
+The estimated optimal shrinkage intensity for group $k$ was computed according to \autoref{eq:lambda_hat_unbias} as follow
+\begin{align}
+	\hat \lambda^{(k)\star} &= \frac{\sum^P_{i=1}\widehat{Var}(v^{(k)}_i) - \widehat{Cov}(v^{(k)}_i, v^{(k)}_{target})}
+									{\sum^P_{i=1}(v^{(k)}_i - v^{(k)}_{target})^2} \nonumber \\
+							&\approx \frac	{ \sum^P_{i=1}\widehat{Var}(v^{(k)}_i) }
+											{ \sum^P_{i=1}(v^{(k)}_i - v^{(k)}_{target})^2 }
+\end{align}
+The computation of $\widehat{Var}(v^{(k)}_i)$ for each group k is analog to the shrinkage-t approach and was being separately computed for each group.
+\begin{align*}
+	\widehat{Var}(v^{(k)}_i) 
+		&= \widehat{Var}(\frac{N_k}{N_k-1}\overline{w}^{(k)}_i) 
+			= \frac{N_k^2}{(N_k-1)^2}\widehat{Var}(\overline{w}^{(k)}_i) \\
+		&= \frac{N_k^2}{(N_k-1)^2}\widehat{Var}(\frac{1}{N_k}\sum^{N_k}_j{w^{(k)}_{ij}}) 
+			= \frac{1}{(N_k-1)^2}\widehat{Var}(\sum^{N_k}_j{w^{(k)}_{ij}}) \\
+		&= \frac{1}{(N_k-1)^2}\sum^{N_k}_j\widehat{Var}({w^{(k)}_{ij}}) \\
+		&= \frac{1}{(N_k-1)^2}\sum^{N_k}_j\left(\frac{1}{N_k-1}\sum^{N_k}_{k=1}(w^{(k)}_{ik} - \overline{w}^{(k)}_i)^2 \right) \\
+		&= \frac{N_k}{(N_k-1)^3}\sum^{N_k}_{k=1}(w^{(k)}_{ik} - \overline{w}^{(k)}_i)^2
+\end{align*}
+Finally we have
+\begin{equation} \label{eq:lambda_st_ANOVA}
+	\Rightarrow \hat \lambda^{(k)\star} 
+		= \frac	{\frac{N_k}{(N_k-1)^3}\sum^P_{i=1}\sum^{N_k}_{k=1}(w^{(k)}_{ik} - \overline{w}_i)^2}
+				{\sum^P_{i=1}(v^{(k)}_i - v^{(k)}_{target})^2}	
+\end{equation}
+Insert this estimated shrinkage intensity in \autoref{eq:lambda_st2} we receive the shrinkage estimator for sample variance for the $i$-th gene of group $k$
+\begin{equation}
+	v^{(k)\star}_i = v^{(k)}_{target} \hat \lambda^{(k)\star}  + (1-\hat \lambda^{(k)\star})v^{(k)}_i
+\end{equation}
+After obtain the shrinkage variance estimators as above, we could use those to plug in the formulas for F-statistic of One-Way $k$-groups ANOVA. The definitions are similar
+\begin{align} 
+	SST_{i} 	&= \sum^K_{k=1}N_k(\overline \mu^{(k)}_i - \overline \mu_i)^2 \\
+	MST_{i} 	&= \frac{ SST_{i} }{ K - 1 } \\
+	\label{eq:SSE-shrink}
+	SSE_i^{\star} 		&= \sum^K_{k=1}(N_k - 1)v^{(k)\star}_i \\
+	\label{eq:MSE-shrink}
+	MSE_i^{\star} 		&= \frac{ SSE_i^{\star} }{ N - K }
+\end{align}
+The only thing that changes in comparison with the ordinary One-Way ANOVA is the sum of squares error, which could improve by the shrinkage rule.\\
+The shrinkage F-statistic for detecting differential-express of gene $i$ is given by
+\begin{equation}
+	F^{\star}_i = \frac{MST_i}{MSE_i^{\star}} = \frac{SST_i / (K-1)}{SSE_i^{\star} / (N-K)}
+\end{equation}

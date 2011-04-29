@@ -1,0 +1,37 @@
+\select@language {english}
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {section}{\numberline {2}Background}{5}{section.2}
+\contentsline {subsection}{\numberline {2.1}Microarray}{5}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Student's t-test}{6}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}\it One-sample t-test}{7}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}\it Two-sample t-test}{9}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}{\bf AN}alysis {\bf O}f {\bf VA}riance}{10}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}\it 2-groups One-Way ANOVA}{10}{subsubsection.2.3.1}
+\contentsline {subsubsection}{\numberline {2.3.2}\it K-groups One-Way ANOVA}{13}{subsubsection.2.3.2}
+\contentsline {section}{\numberline {3}Shrinkage concept}{13}{section.3}
+\contentsline {subsection}{\numberline {3.1}James \& Stein shrinkage rule}{13}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Introduction}{13}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Derivation of shrinkage rule}{14}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Estimation of the optimal shrinkage intensity}{16}{subsubsection.3.1.3}
+\contentsline {subsubsection}{\numberline {3.1.4}Example}{17}{subsubsection.3.1.4}
+\contentsline {subsection}{\numberline {3.2}The \emph {shrinkage}-t statistic}{18}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}The \emph {shrinkage}-ANOVA}{20}{subsection.3.3}
+\contentsline {section}{\numberline {4}Shrinkage-t simulation}{22}{section.4}
+\contentsline {subsection}{\numberline {4.1}Simulation settings}{22}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Choices of the target}{23}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Methods of evaluation}{27}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Result}{28}{subsection.4.4}
+\contentsline {section}{\numberline {5}Shrinkage-ANOVA simulation}{31}{section.5}
+\contentsline {subsection}{\numberline {5.1}Simulation settings}{32}{subsection.5.1}
+\contentsline {subsection}{\numberline {5.2}Choices of the target}{35}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Methods of evaluation}{39}{subsection.5.3}
+\contentsline {subsection}{\numberline {5.4}Result}{40}{subsection.5.4}
+\contentsline {section}{\numberline {6}Discussion}{40}{section.6}
+\contentsline {section}{\numberline {A}Fundamental statistic}{41}{appendix.A}
+\contentsline {subsection}{\numberline {A.1}Expected value and variance}{41}{subsection.A.1}
+\contentsline {subsection}{\numberline {A.2}Sum of independent random variables}{41}{subsection.A.2}
+\contentsline {subsection}{\numberline {A.3}Student's t-distribution}{41}{subsection.A.3}
+\contentsline {subsection}{\numberline {A.4}Fisher's F-distribution}{42}{subsection.A.4}
+\contentsline {section}{\numberline {B}Cochran's theorem}{42}{appendix.B}
+\contentsline {section}{\numberline {C}Fisher's theorem}{43}{appendix.C}
+\contentsline {section}{\numberline {D}Distribution of sample mean $\overline \mu $ and sample variance $\mathaccentV {hat}05E{\sigma }^2$ }{43}{appendix.D}

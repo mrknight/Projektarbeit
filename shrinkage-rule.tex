@@ -1,0 +1,102 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Introduction}
+We all know the sample variance estimator (biased or unbiased) from a population . This could be even shown that the unbiased sample variance converges toward the real variance if the samples size $N$ is large enough. In microarray analysis, the number of individuals using in the experiment is mostly limited, because of costs, biological limit of individual, ethics limit... In almost cases, the samples size in microarray experiments is around 3, which is very "dangerous" to use in any statistical framework. The classical estimator in statistic becomes very unstable in this setting.\\
+The original idea of James \& Stein rule ~\citep{Stein:1955p2498} is to solve the problem of estimating the mean of a $P$-dimensional multivariate normal distribution from a single (N = 1) vector-valued observation. This is an extreme example of the "small N, large P" setting. In this case the widely used maximum-likelihood estimator equals the vector of observations, and of course unstable. That so-called "Stein phenomenom" was demonstrated by Stein in 1956, even shown in the high-dimensional inference problems it is often possible to improve upon the maximum likelihood estimator. James \& Stein proposed a new rule to improve the stability of the maximum-likelihood estimator. \cite{OpgenRhein:2007p11} even shown this rule can be use to construct a procedure for improving {\it any} variance estimator. In the following text we are trying to explain the James and Stein rule from the paper of ~\cite{OpgenRhein:2007p11}.\\
+\begin{definition}
+Suppose that we have an unregularized estimator $\hat \theta$ from the true parameter $\theta$, e.g. it could be the maximum-likelihood estimator vector from the 	above example.
+\\
+The shrinkage estimator is then written as
+\begin{align}
+	\delta^{\lambda} 	& = \hat \theta - \lambda \Delta \nonumber \\
+						& = \hat \theta - \lambda(\hat \theta - {\hat \theta}^{Target}) \nonumber \\
+						& = \lambda{\hat \theta}^{Target} + (1-\lambda){\hat \theta} \label{eq:srule}
+\end{align}
+In other words, the shrinkage estimator $\delta^{\lambda}$ is the linear combination of the original estimator ${\bf \hat \theta}$ and a target estimator ${\bf \hat \theta}^{Target}$. The parameter $\lambda$ is the {\it shrinkage intensity} which determines how those two estimators are "pooled" together. If $\lambda = 1$ then the target dominates completely, and if $\lambda = 0$ no shrinkage occurs.\\
+In James \& Stein estimation the search for the optimal $\lambda$ is considered from a decision theoretic perspective. First, a loss function is selected (e.g. the squared error). Second, $\lambda$ is chosen such that the corresponding risk (the expectation of the loss with respect to the data) of $\delta^{\lambda}$ is minimized. (e.g. the mean squared error). In our context, $\lambda$ is estimated from the data regarding to minimize the mean squared error of $\delta^{\lambda}$.\\
+\end{definition}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Derivation of shrinkage rule}
+Using this rule (\autoref{eq:srule}), the mean squared error function (MSE) of $\delta^{\lambda}$ could be calculated even {\it without} knowing the true value of {\bf $\theta$}:
+\begin{proof}
+\begin{align*}
+	MSE(\delta^{\lambda}) 	& = MSE(\hat \theta - \lambda(\hat \theta - {\hat \theta}^{Target})) \\							
+							& = E[(\hat \theta - \lambda(\hat \theta - {\hat \theta}^{Target}) - \theta)^2] \\ 
+							& = E[(\hat \theta  - \theta - \lambda(\hat \theta - {\hat \theta}^{Target}))^2] \\
+							& = E[ (\hat \theta  - \theta)^2 - 2\lambda(\hat \theta - {\hat \theta}^{Target})(\hat \theta - \theta) + \lambda^2(\hat \theta - {\hat \theta}^{Target})^2 ]  \\
+							& = E(\hat \theta  - \theta)^2 - 2\lambda E[(\hat \theta - {\hat \theta}^{Target})(\hat \theta - \theta)] + \lambda^2 E(\hat \theta - {\hat \theta}^{Target})^2 \\
+							& = MSE(\hat \theta) - 2\lambda E[(\hat \theta - {\hat \theta}^{Target})(\hat \theta - \theta)] + \lambda^2 E(\hat \theta - {\hat \theta}^{Target})^2
+\end{align*}
+Examine further the second term without the $\lambda$:
+\begin{align*}
+	& E[(\hat \theta - {\hat \theta}^{Target})(\hat \theta - \theta)] \\
+	& = E[ \hat \theta^2 - \hat \theta{\hat \theta}^{Target} - \theta(\hat \theta - \hat \theta^{Target}) ] \\
+	& = E(\hat \theta^2) - E(\hat \theta{\hat \theta}^{Target}) - E[ \theta(\hat \theta - \hat \theta^{Target}) ] \\
+	& = E(\hat \theta^2) {\color{red} - E^2(\hat \theta) + E^2(\hat \theta)} - E(\hat \theta{\hat \theta}^{Target}) {\color{green} + E(\hat \theta)E(\hat \theta^{Target}) - E(\hat \theta)E(\hat \theta^{Target})} - E[ \theta(\hat \theta - \hat \theta^{Target}) ] \\
+	& = Var(\hat \theta) {\color{red} + E^2(\hat \theta)} - Cov(\hat \theta, \hat \theta^{Target}) {\color{green} - E(\hat \theta)E(\hat \theta^{Target})} - E[ \theta(\hat \theta - \hat \theta^{Target}) ]\\
+	& = Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E^2(\hat \theta) - E(\hat \theta)E(\hat \theta^{Target}) - E[ \theta(\hat \theta - \hat \theta^{Target}) ]\\
+	& = Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta)[E(\hat \theta) - E(\hat \theta^{Target})] - E[ \theta(\hat \theta - \hat \theta^{Target}) ]\\
+	& = Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta)E(\hat \theta - \hat \theta^{Target}) - \theta E(\hat \theta - \hat \theta^{Target})\\
+	& = Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta - \hat \theta^{Target})(E(\hat \theta) - \theta)\\
+	& = Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta - \hat \theta^{Target})Bias(\hat \theta) := a
+\end{align*}
+Let's denote \\
+$b := E(\hat \theta - {\hat \theta}^{Target})^2$\\
+$c := MSE(\hat \theta)$\\
+then 
+\begin{align*}
+	MSE(\delta^{\lambda}) & = MSE(\hat \theta) + \lambda^2 E(\hat \theta - {\hat \theta}^{Target})^2 \\
+	& - 2\lambda [Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta - \hat \theta^{Target})Bias(\hat \theta)] \\
+	& = c + \lambda^2 b - 2\lambda a
+\end{align*}
+\end{proof}
+The MSE function for shrinkage estimator $\delta^{\lambda}$ turns out to be a quadratic function of $\lambda$ whose parameters $a, b$ and $c$ are completely dependent on merely two estimators ${\bf \hat \theta}$ and ${\bf \hat \theta}^{Target}$ (note that the MSE($\hat \theta$) = c diminishes and has no influence in the risk curve of MSE($\delta^{\lambda}$)). In other words, with ${\bf \hat \theta}$ and ${\bf \hat \theta}^{Target}$ which could be completely estimated from data, a optimal shrinkage intensity $\lambda$ can always be calculated to minimize the MSE. In comparing to MSE of the unregularized estimator $\hat \theta$, the risk improment of $\delta^{\lambda}$ determined only by $a$ and $b$. Since the MSE function of shrinkage estimator $\delta^{\lambda}$ is a quadratic function of $\lambda$, the optimal shrinkage intensity $\lambda^\star$ is simply calculated as
+\begin{equation} \label{eq:lambda}
+	\lambda^\star = \frac{a}{b} = \frac{Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target}) + E(\hat \theta - \hat \theta^{Target})Bias(\hat \theta)}{E(\hat \theta - {\hat \theta}^{Target})^2}
+\end{equation}
+\\
+Some interesting properties of \autoref{eq:lambda} could be reviewed as follow:
+\begin{itemize} 
+	\item The smaller the variance of $\hat \theta$, the smaller becomes the numerator of \autoref{eq:lambda}, leads to smaller $\lambda^\star$. With small $\lambda^\star$, the influence of the target $\hat \theta^{Target}$ was lessened. Therefore, with increasing sample size the shrinkage estimator grows more stabilized against the target estimator.
+	\item The $\lambda^\star$ also decreases when the mean squared difference $E(\hat \theta - {\hat \theta}^{Target})^2$ increases (the denominator of \autoref{eq:lambda}). It worths to mention that this characteristic of $\lambda^\star$ automatically protects the shrinkage estimator $\delta^{\lambda}$ against a misspecified target ${\hat \theta}^{Target}$.
+	\item If $\hat \theta$ is an {\it unbiased} estimator of ${\bf \theta}$, that means $E(\hat \theta) = \theta$ and $Bias(\hat \theta) = 0$, this equation reduces to
+		\begin{equation}
+			\lambda^\star = \frac{Var(\hat \theta) - Cov(\hat \theta, \hat \theta^{Target})}{E(\hat \theta - {\hat \theta}^{Target})^2}
+		\end{equation}	
+	\item If the unregularized estimator $\hat \theta$ is {\it biased}, and the bias points already towards the target, then the $\lambda^\star$ is correspondingly reduced.	
+	\item The $\lambda^\star$ depends on the correlation between estimation error of $\hat \theta$ and $\hat \theta^{Target}$. If both are positively correlated then the weight from the second term in the numerator of \autoref{eq:lambda} put on the shrinkage target decreases.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Estimation of the optimal shrinkage intensity}
+In practical application of the shrinkage rule (\autoref{eq:srule}) one needs to obtain an estimate $\hat \lambda^\star$ of the optimal shrinkage intensity by estimated from the data. Many ideas arises to estimate $\lambda^\star$ with the given \autoref{eq:lambda}, from \cite{Thompson:1968p2499} in the univariate case to \cite{Ledoit:2003p2496} with the multivariate case. We take the suggestion from \cite{Schafer:2005p1040} which estimate the optimal $\lambda^\star$ by replacing all expectations, variances, and covariances in \autoref{eq:lambda} by their {\it unbiased} empirical counterparts. This leads to
+\begin{equation} \label{eq:lambda_hat}
+	\hat \lambda^\star = \frac{\hat a}{\hat b} = \frac{\hat Var(\hat \theta) - \hat Cov(\hat \theta, \hat \theta^{Target}) + (\hat \theta - \hat \theta^{Target})\hat Bias(\hat \theta)}{(\hat \theta - {\hat \theta}^{Target})^2}
+\end{equation}
+Of course in case of {\it unbiased} $\hat \theta$ this reduces again to
+\begin{equation} \label{eq:lambda_hat_unbias}
+	\hat \lambda^\star = \frac{\hat Var(\hat \theta) - \hat Cov(\hat \theta, \hat \theta^{Target})}{(\hat \theta - {\hat \theta}^{Target})^2}
+\end{equation}
+Some additional points to improve the efficiency of the shrinkage rule could be considered as well
+\begin{itemize}
+	\item The construction of the above shrinkage estimator assumes nothing about a normal or any other distribution of the data. Furthermore, a simple theorem derived from \cite{Ledoit:2003p2496} show that the optimal shrinkage intensity $\lambda^\star$ from \autoref{eq:lambda} guarantees minimal the mean square error {\it without} the need of having to specify any underlying distributions, and could be computed {\it without} requiring computationally expensive procedures such as Monte Carlo Markov Chain, the bootstrap, or cross-validation. A part of this theorem was already shown from us in the derivation part.
+	\item In finite samples $\hat \lambda^\star$ may exceed the value one, and in some cases it may even become negative. By {\it truncating} the estimated $\hat \lambda^\star$ using $\hat \lambda^\star$ = max(0, min(1, $\hat \lambda^\star$ )), it could avoid over shrinkage or negative shrinkage when compute the estimated  $\hat \lambda^\star$.
+	\item Another very useful application of this rule is that allows {\it multiple shrinkage intensities}, by having multiple targets, and each has its own different optimal shrinkage intensity. We will emphasize this idea again when considering the simulation setup.
+\end{itemize}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Example}
+Consider again the old problem of Stein from the introduction part. Suppose we need to estimate the mean of a $P$-dimensional multivariate normal distribution with unit-diagonal covariance matrix from a single (N = 1) vector-valued observation $\underline{x}$. The maximum-likelihood estimator in this case equals the vector of observation, i.e. $\underline{\hat \theta}^{ML} = \underline{x}$. Since the estimator has $P$ dimensions, that means $\hat \theta^{ML}_k = x_k \forall k=1..P$. In this extreme case which none of any statistical frameworks could be helpful with only one observation, however, the efficiency over the ML-estimator could be improved with the shrinkage rule.\\
+We choose the target is zero ($\hat \theta^{Target} = 0$), the covariances are zeros too because no correlation between the dimensions (Cov($x_k, x_l$) = 0) and the variances are ones (Var($x_k$) = 1). Insert into \autoref{eq:lambda} and \autoref{eq:lambda_hat} results
+\begin{align*}
+	\lambda^\star &= \frac{Var(\underline{\hat \theta}^{ML})}{E(\underline{\hat \theta}^{ML})^2} = \frac{\sum^P_k{Var(\hat \theta^{ML}_k)}}{\sum^P_k{E(\hat \theta^{ML}_k)^2}} = \frac{\sum^P_k{Var(x_k)}}{\sum^P_k{E(x_k)^2}} = \frac{P}{\sum^P_k{E(x_k)^2}}\\
+	\Rightarrow \hat \lambda^\star &= \frac{P}{\sum^P_k{x_k^2}}
+\end{align*}
+The James-Stein shrinkage estimator is easily constructed from the shrinkage rule (\autoref{eq:srule})
+\begin{equation*}
+	\hat \theta^{JS}_k = \hat \lambda^\star \hat \theta^{Target}_k + (1-\hat \lambda^\star) \hat \theta^{ML}_k = \left( 1 - \frac{P}{\sum^P_k{x^2_k}} \right)x_k
+\end{equation*}
+Another target followed from \cite{Lindley:1972p2501} is the mean across dimensions, i.e. ${\hat \theta}^{Target} = \overline{x} = \frac{1}{P}\sum^P_k x_k$, we get $\hat\lambda^\star = \frac{P-1}{\sum^P_k{(x_k - \overline{x})^2}}$ and obtain
+\begin{align*}
+	\hat \theta^{EM}_k 	&= \frac{P-1}{\sum^P_k{(x_k - \overline{x})^2}} \overline{x} + \left( 1 - \frac{P-1}{\sum^P_k{(x_k - \overline{x})^2}} \right)x_k \\
+						&= x_k + \frac{P-1}{\sum^P_k{(x_k - \overline{x})^2}}(x_k - \overline{x}) \\
+						&= \overline{x} + \left( 1 - \frac{P-1}{\sum^P_k{(x_k - \overline{x})^2}} \right)(x_k - \overline{x})
+\end{align*}
+Dependent on what kind of estimator one needs to improve, many targets could be considered and the choice of the target could have a huge impact on efficiency. \cite{Schafer:2005p1040} provide a fairly extensive review of the target choice in case of estimating the covariance matrix.

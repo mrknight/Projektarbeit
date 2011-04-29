@@ -1,0 +1,151 @@
+As we already saw, the shrinkage rule is not simple to understand, even the derivation of this rule isn't easy either. Nevertheless, the application of this rule to extend the ordinary t-statistic is simply straight forward.\\
+To examine how good the "naive" application of James-Stein shrinkage rule to the ordinary t-test effects the determination of differentially expressed genes, we set up some simulations to see how good the new rule could improve to estimate the variance and how stable the new rule was when it was adapted to various conditional settings.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Simulation settings}
+We would like to examine some properties and qualities of the James-Stein rule as follow
+\begin{itemize}
+	\item Since the James-Stein rule modifies the variance of the standard t-test, the new estimated variance is under suspicion not $Chi$-squared distributed anymore, thus we're not hoping that the new null hypothesis distribution is still exactly a t-distribution. It is still worth to see that under the given true null hypothesis, what kind of distribution could deliver the new rule, as well as how different the new distribution to the standard t-distribution of the ordinary case.
+	\item Since the application of the James-Stein rule in microarray analysis is to improve the estimating of genes-specific variances, the difference between the new improved estimated variances and the true variances was detailed examined as well.
+\end{itemize}	
+We considered 4 simulation settings in the hope to cover some known cases which could happens in a real microarray study. The simulated data were generated from a normal distribution with the null hypothesis is $\mu = 0$ and the settings for variance of each group as follow
+\begin{enumerate}[(I)]
+	\item The first simulation option is very simple, consider the null hypothesis is $\sigma^2 = 1$ for both groups. The standard t-test should be "behaved" perfect in this case.
+	\item This simulation reflects the standard behavior of two groups microarray analysis. One group has a small variance while another group has a larger variance. Nonetheless the mean values of two groups are equal. The null hypothesis is where the variance for group 1 is $\sigma_1^2 = 1$ and the variance for group 2 is $\sigma_2^2 = 100$. The standard t-test should still have a perfect curve in this case.
+	\item All the genes from two groups have a same variance $\sigma^2 = 1$, but some genes may behave like {\it outliers} in comparison with another genes, and has a larger variance $\sigma^2 = 100$. Those genes with this behavior were randomly chosen and the number of those {\it outliers} in the total number of genes is fixed with $p = 1, 2, 5, 10, 20, 50\%$.
+	\item In this setting each group has his own variance like in setting (II) ($\sigma_1^2 = 1$, $\sigma_2^2 = 100$), but two groups also have outliers as the same in setting (III). This case can be considered as a combination of setting (II) and (III).
+\end{enumerate}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Choices of the target}
+A typical microarray experiment delivers an informative scene as follow: after some "tendious" preprocessing routines we receive the mRNA-abundant measurements in form of real values, contain mostly in two groups, one for the control and one for the treatment. Dependent on what kinds of biological host we're dealing with, those values contains for thousands to ten thousands genes.\\
+Let's denote $x_{ij}$ and $y_{ij}$ the $j$-th measurement of gene $i$ from the control group and treatment group, respectively. $(i = 1..P, j = 1..N)$\\
+We chosen the number of genes P = 5000 and the number of samples N = 3 for our simulations same as the simulation which be used in \cite{OpgenRhein:2007p11}. Of course each group could have an own sample size, for convenience we assume that two groups have the same sample size N. The case with two different sample sizes could be analog derived.\\
+The sample mean of each group is defined as follow
+\begin{align*}
+	\overline{x}_i &= \frac{1}{N}\sum^N_k x_{ik} \\
+	\overline{y}_i &= \frac{1}{N}\sum^N_k y_{ik}
+\end{align*}
+The unbiased sample variances of two groups are $v_i$ and $w_i$ respectively
+\begin{align*}
+	\hat v_i &= \frac{1}{N-1}\sum^N_k (x_{ik} - \overline{x}_i)^2 \\
+	\hat w_i &= \frac{1}{N-1}\sum^N_k (y_{ik} - \overline{y}_i)^2
+\end{align*}
+Because of the flexibility of shrinkage rule, we're trying not to limit any possibilities of extending the rule. All of evaluating constructions below are merely our ideas how to choose wisely the target of the shrinkage rule. Any another freely ideas could be considered as well, but as we mentioned in the construction part of the James-Stein rule, a target could be wisely or badly chosen, and although the new rule has his mechanism to automatically prevent over- or undershrink, a wisely chosen construction for the target should be always taken place before.
+\begin{enumerate}
+	\item This case assumes that two groups of microarray data have for each group a distinctive variance (same as the $unequal$-variance case of the ordinary t-test), therefore for each group exists a separate target (multiple targets), and for each new estimated variance exists a distinct shrinkage intensity $\lambda$ (multiple shrinkage intensities). Let's denote the targets as
+		\begin{align*}
+			v_{target} &= median(\hat v_1, \hat v_2, ..., \hat v_N) \\
+			w_{target} &= median(\hat w_1, \hat w_2, ..., \hat w_N) \\
+		\end{align*}
+		The shrinkage intensity for each group was defined as (\autoref{eq:lambda_st2})
+		\begin{align*}
+			\hat \lambda_1 &= \frac{\frac{N}{(N-1)^3}\sum^P_{i=1}\sum^N_{k=1}\left((x_{ik}-\overline{x}_i)^2 - \frac{1}{N}\sum_{j=1}^N(x_{ij}-\overline{x}_i)^2\right)^2}{\sum^P_{i=1}(\hat v_i - v_{target})^2}	 \\
+			\hat \lambda_2 &= \frac{\frac{N}{(N-1)^3}\sum^P_{i=1}\sum^N_{k=1}\left((y_{ik}-\overline{y}_i)^2 - \frac{1}{N}\sum_{j=1}^N(y_{ij}-\overline{y}_i)^2\right)^2}{\sum^P_{i=1}(\hat w_i - w_{target})^2}	 \\
+		\end{align*}
+		The new improved estimated variance for each group was defined as (\autoref{eq:shrink_var})
+		\begin{align*}
+			v_i^\star &= (1-\hat \lambda_1)\hat v_i + \hat \lambda_1 v_{target} \\
+			w_i^\star &= (1-\hat \lambda_2)\hat w_i + \hat \lambda_2 w_{target}
+		\end{align*}
+		The shrinkage t-statistic for detecting differential-express of gene $i$ is simple (\autoref{eq:shrink-t})
+		\begin{equation*}
+			t^{(1)}_i = \frac{\overline{x}_i - \overline{y}_i}{\sqrt{ \frac{v^\star_i+w^\star_i}{N} }}
+		\end{equation*}
+		After our inspection in \cite{OpgenRhein:2007p11} work, this case turns out to be their default option of calculating the shrinkage variance when two groups have different variances in the $st$-package, which was programmed in R-Framework.
+	\item This case uses the same assumption as the first case, instead of using different targets, we use the $same$ target for two shrinkage variances. This target was chosen as
+	\begin{equation*}
+		v_{target} = median(\hat v_1, \hat v_2, ..., \hat v_N, \hat w_1, \hat w_2, ..., \hat w_N)
+	\end{equation*}
+	Others terms are defined as the above case.
+	\item In this case, the idea is to treat two groups as one group, and we define a new variable as follow
+	\begin{equation}
+		\hat u_i = \frac{\hat v_i + \hat w_i}{2}
+	\end{equation}
+	The target was chosen with the new variable
+	\begin{equation*}
+		u_{target} = median(\hat u_1, \hat u_2, ..., \hat u_N)
+	\end{equation*}	
+	The multiple shrinkage intensities was eliminated in this case, turn out to have one target with one shrinkage intensity. Therefore the data of two groups $x_{ij}$ and $y_{ij}$ need to combine to one group $z_{ij}$ as follow
+	\begin{align*}
+		z_{ij} = x_{ij} &\forall i=1..P, \forall j=1..N\\
+		z_{ij} = y_{i,(j-N)} &\forall i=1..P, \forall j=(N+1)..2N
+	\end{align*}
+	Let's denote M = 2N, the new dataset has the new sample mean and unbiased sample variance as well
+	\begin{align*}
+		\overline{z}_i &= \frac{1}{M}\sum^M_k z_{ik} \\
+		\hat z_i &= \frac{1}{M-1}\sum^M_k (z_{ik} - \overline{z}_i)^2
+	\end{align*}	
+	The $shared$ shrinkage intensity was calculated as
+	\begin{equation*}
+	\hat \lambda = \frac{\frac{M}{(M-1)^3}\sum^P_{i=1}\sum^M_{k=1}\left((z_{ik}-\overline{z}_i)^2 - \frac{1}{M}\sum_{j=1}^M(z_{ij}-\overline{z}_i)^2\right)^2}{\sum^P_{i=1}(\hat u_i - u_{target})^2}
+	\end{equation*}		
+	The shrinkage variance and the shrinkage t-statistic for this case are simply analog
+	\begin{align*}
+		u_i^\star &= (1-\hat \lambda)\hat u_i + \hat \lambda u_{target} \\
+		t^{(3)}_i &= \frac{\overline{x}_i - \overline{y}_i}{\sqrt{ \frac{2u^\star_i}{N} }}
+	\end{align*}	
+	\item This case uses the same idea of common target of the 2. case. The target was chosen in this case is however the $u_{target}$ from the 3. case. That means we have the multiple shrinkage intensities as follow
+	\begin{align*}
+		\hat \lambda_1 &= \frac{\frac{N}{(N-1)^3}\sum^P_{i=1}\sum^N_{k=1}\left((x_{ik}-\overline{x}_i)^2 - \frac{1}{N}\sum_{j=1}^N(x_{ij}-\overline{x}_i)^2\right)^2}{\sum^P_{i=1}(\hat v_i - u_{target})^2}	 \\
+		\hat \lambda_2 &= \frac{\frac{N}{(N-1)^3}\sum^P_{i=1}\sum^N_{k=1}\left((y_{ik}-\overline{y}_i)^2 - \frac{1}{N}\sum_{j=1}^N(y_{ij}-\overline{y}_i)^2\right)^2}{\sum^P_{i=1}(\hat w_i - u_{target})^2}	 \\
+	\end{align*}
+	The shrinkage variances were obvious separately calculated
+	\begin{align*}
+		v_i^\star &= (1-\hat \lambda_1)\hat v_i + \hat \lambda_1 u_{target} \\
+		w_i^\star &= (1-\hat \lambda_2)\hat w_i + \hat \lambda_2 u_{target}
+	\end{align*}
+	The shrinkage t-statistic for detecting differential-express of gene $i$ is analog (but obviously not the same) with the 1. case
+	\begin{equation*}
+		t^{(4)}_i = \frac{\overline{x}_i - \overline{y}_i}{\sqrt{ \frac{v^\star_i+w^\star_i}{N} }}
+	\end{equation*}
+	\item This case uses the assumption that the two groups come with the same variance. We discovered that the $st$-package from \cite{OpgenRhein:2007p11} uses the same approach for compute the shrinkage t-statistic for the same variance case.\\
+	This case uses the combined dataset $z_{ij}$ from the 3. case. The target was chosen as the median of all unbiased sample variances of $z$.
+	\begin{equation*}
+		z_{target} = median(\hat z_1, \hat z_2, ..., \hat z_N)
+	\end{equation*}	
+	The $combined$ shrinkage intensity was also calculated completely from $z$
+	\begin{equation*}
+	\hat \lambda = \frac{\frac{M}{(M-1)^3}\sum^P_{i=1}\sum^M_{k=1}\left((z_{ik}-\overline{z}_i)^2 - \frac{1}{M}\sum_{j=1}^M(z_{ij}-\overline{z}_i)^2\right)^2}{\sum^P_{i=1}(\hat z_i - z_{target})^2}
+	\end{equation*}		
+	The $combined$ shrinkage variance and the shrinkage t-statistic for this case are simply straightforward
+	\begin{align*}
+		z_i^\star &= (1-\hat \lambda)\hat z_i + \hat \lambda z_{target} \\
+		t^{(5)}_i &= \frac{\overline{x}_i - \overline{y}_i}{\sqrt{ \frac{2z^\star_i}{N} }}
+	\end{align*}
+\end{enumerate}	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methods of evaluation}
+There are some properties of the James-Stein shrinkage rule when applied in microarray study that we're interested in
+\begin{enumerate}[i.]
+	\item How well could the new rule do in term of estimating the variance?
+	\item Under the assumption of a true null hypothesis, which distribution deliver the shrinkage t-statistic? What is the differences of this new distribution in comparing with the standard t-distribution?
+	\item In case that the new distribution is a t-distribution, which degrees of freedom has the distribution and that degrees could be estimated as well?
+\end{enumerate}
+To answer the i.question, one could use many methods for evaluating as well. We decided to measure the distance of the new estimated variance with the true variance since we know the true variance from simulations. Because there are 5 cases to estimate the variance, the score function for each case should be well defined as well. In some cases which we have two targets to measure (two variances in the 1. case for example), some other cases which we have merely one target (one shared variance in the 3. case). Therefore we'll define two score functions to cover the interested question for every case. Let's denote $\sigma_1^2, \sigma_2^2$ are the true known variances ($\sigma_1^2 = \sigma_2^2$ for the one variance case) and $\sigma^2 = \frac{\sigma_1^2 + \sigma_2^2}{2}$.  We define for each case from the above 5.cases two score functions as follow
+\begin{enumerate}[(1)]
+	\item This case has two estimated variances for each gene $i$: $v^\star_i$ and $w^\star_i$
+	\begin{align*} 
+		score^{(1)} &= \sum^P_i\left( (v^\star_i - \sigma_1^2)^2 + (w^\star_i - \sigma_2^2)^2\right) \\
+		\widetilde {score}^{(1)} &= \sum^P_i\left( \frac{v^\star_i+w^\star_i}{2} - \sigma^2\right)^2
+	\end{align*}	
+	\item This case has also two estimated variances for each gene $i$: $v^\star_i$ and $w^\star_i$
+	\begin{align*} 
+		score^{(2)} &= \sum^P_i\left( (v^\star_i - \sigma_1^2)^2 + (w^\star_i - \sigma_2^2)^2\right) \\
+		\widetilde {score}^{(2)} &= \sum^P_i\left( \frac{v^\star_i+w^\star_i}{2} - \sigma^2\right)^2
+	\end{align*}
+	\item This case has merely one estimated variance $u^\star_i$ for each gene $i$. Therefore the first score function could not be defined.
+	\begin{align*} 
+		\widetilde {score}^{(3)} &= \sum^P_i\left( u^\star_i - \sigma^2\right)^2
+	\end{align*}
+	\item This case is similar to 1. and 3.case, has also two estimated variances for each gene $i$: $v^\star_i$ and $w^\star_i$
+	\begin{align*} 
+		score^{(4)} &= \sum^P_i\left( (v^\star_i - \sigma_1^2)^2 + (w^\star_i - \sigma_2^2)^2\right) \\
+		\widetilde {score}^{(4)} &= \sum^P_i\left( \frac{v^\star_i+w^\star_i}{2} - \sigma^2\right)^2
+	\end{align*}
+	\item This case has again merely one estimated variance $z^\star_i$ for each gene $i$.
+	\begin{align*} 
+		\widetilde {score}^{(5)} &= \sum^P_i\left( z^\star_i - \sigma^2\right)^2
+	\end{align*}
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Result}
+	\input{results-t}
