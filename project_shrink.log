@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.1.2)  29 APR 2011 15:18
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.1.2)  29 APR 2011 18:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -778,46 +778,40 @@ Package rerunfilecheck Info: File `project_shrink.out' has not changed.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
- 9611 strings out of 493747
- 145950 string characters out of 3143547
- 265942 words of memory out of 3000000
+ 9610 strings out of 493747
+ 145934 string characters out of 3143547
+ 265943 words of memory out of 3000000
  12464 multiletter control sequences out of 15000+200000
  17461 words of font info for 65 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  38i,12n,43p,1412b,454s stack positions out of 5000i,500n,10000p,200000b,50000s
-pdfTeX warning (dest): name{figure.caption.1} has been referenced but does no
-t exist, replaced by a fixed one
-
-</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb><
-/usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
-usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb
-></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
-</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><
-/usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></u
-sr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr
-/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/l
-ocal/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/loc
-al/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/
-texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/tex
-live/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texl
-ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/texli
-ve/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texliv
-e/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texli
-ve/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/texli
-ve/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texliv
-e/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/
-2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/20
-10/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/201
-0/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on project_shrink.pdf (46 pages, 1009044 bytes).
+</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb
+></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb>
+</usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.p
+fb></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pf
+b></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb
+></usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><
+/usr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
+sr/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr
+/local/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/l
+ocal/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/loca
+l/texlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/te
+xlive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb></usr/local/tex
+live/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmss17.pfb></usr/local/texl
+ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/tex
+live/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi12.pfb></usr/local/tex
+live/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texl
+ive/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texliv
+e/2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/
+2010/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/local/texlive/2
+010/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on project_shrink.pdf (46 pages, 1009030 bytes).
 PDF statistics:
- 768 PDF objects out of 1000 (max. 8388607)
- 676 compressed objects within 7 object streams
- 196 named destinations out of 1000 (max. 500000)
+ 767 PDF objects out of 1000 (max. 8388607)
+ 675 compressed objects within 7 object streams
+ 195 named destinations out of 1000 (max. 500000)
  324 words of extra memory for PDF output out of 10000 (max. 10000000)
 

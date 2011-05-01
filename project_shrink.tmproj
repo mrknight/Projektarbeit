@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>shrinkage-ANOVA.tex</string>
+	<string>Simu-ANOVA.tex</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -49,19 +49,91 @@
 			<key>firstVisibleLine</key>
 			<integer>74</integer>
 		</dict>
+		<key>Simu-ANOVA.tex</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>61</integer>
+				<key>line</key>
+				<integer>3</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>Simu-t.tex</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>51</integer>
+				<key>line</key>
+				<integer>1</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>project_shrink.tex</key>
 		<dict>
 			<key>caret</key>
 			<dict>
 				<key>column</key>
-				<integer>47</integer>
+				<integer>0</integer>
 				<key>line</key>
-				<integer>32</integer>
+				<integer>35</integer>
 			</dict>
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>31</integer>
+			<integer>40</integer>
+		</dict>
+		<key>results-ANOVA.tex</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>0</integer>
+				<key>line</key>
+				<integer>0</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
+		<key>results-t.tex</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>79</integer>
+				<key>line</key>
+				<integer>46</integer>
+			</dict>
+			<key>columnSelection</key>
+			<false/>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>18</integer>
+			<key>selectFrom</key>
+			<dict>
+				<key>column</key>
+				<integer>39</integer>
+				<key>line</key>
+				<integer>46</integer>
+			</dict>
+			<key>selectTo</key>
+			<dict>
+				<key>column</key>
+				<integer>79</integer>
+				<key>line</key>
+				<integer>46</integer>
+			</dict>
 		</dict>
 		<key>shrinkage-ANOVA.tex</key>
 		<dict>
@@ -75,42 +147,16 @@
 			<key>firstVisibleColumn</key>
 			<integer>0</integer>
 			<key>firstVisibleLine</key>
-			<integer>21</integer>
-		</dict>
-		<key>shrinkage-rule.tex</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>23</integer>
-				<key>line</key>
-				<integer>74</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>63</integer>
-		</dict>
-		<key>shrinkage-t.tex</key>
-		<dict>
-			<key>caret</key>
-			<dict>
-				<key>column</key>
-				<integer>51</integer>
-				<key>line</key>
-				<integer>5</integer>
-			</dict>
-			<key>firstVisibleColumn</key>
-			<integer>0</integer>
-			<key>firstVisibleLine</key>
-			<integer>0</integer>
+			<integer>20</integer>
 		</dict>
 	</dict>
 	<key>openDocuments</key>
 	<array>
 		<string>project_shrink.tex</string>
-		<string>shrinkage-rule.tex</string>
-		<string>shrinkage-t.tex</string>
+		<string>results-t.tex</string>
+		<string>results-ANOVA.tex</string>
+		<string>Simu-ANOVA.tex</string>
+		<string>Simu-t.tex</string>
 		<string>shrinkage-ANOVA.tex</string>
 		<string>ANOVA.tex</string>
 		<string>Background.tex</string>
@@ -118,6 +164,6 @@
 	<key>showFileHierarchyDrawer</key>
 	<false/>
 	<key>windowFrame</key>
-	<string>{{256, 73}, {1118, 801}}</string>
+	<string>{{399, 176}, {1118, 801}}</string>
 </dict>
 </plist>
